@@ -1,0 +1,15 @@
+{
+    "serverId": "933824004836458496",
+    "userId": {
+        "ownerDiscodId": "774697773454458890",
+        "ownerDiscordTag": "cappella_smegma#4457"
+    },
+    "channelsId": {
+        "logs": "948158511035056129",
+        "general": "933824004836458499",
+        "bugreport": "949758193393872926"
+    },
+    "rolesId": {
+        "admin": "948160385335300107"
+    }
+}

@@ -1,0 +1,18 @@
+{
+  "name": "lurixbot",
+  "version": "1.0.0",
+  "description": "Un bot con moltissime funzionalità",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cappella_smegma#4457",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "dotenv": "^16.0.0",
+    "moment": "^2.29.1",
+    "mongodb": "^4.4.1",
+    "ms": "^2.1.3"
+  }
+}
