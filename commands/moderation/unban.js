@@ -34,7 +34,7 @@ module.exports = {
         }
 
         try {
-            interaction.guild.members.unban(/*{user: */utente/*, reason: reason }*/)
+            interaction.guild.members.unban({user: utente, reason: reason })
             let embed = new Discord.MessageEmbed()
             .setAuthor("[UNBAN] " + memberId.user.tag, memberId.user.displayAvatarURL({ dynamic: true }))
                 .setColor(configColor.VERDE)
