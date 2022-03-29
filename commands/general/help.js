@@ -7,7 +7,7 @@ module.exports = {
     execute(interaction) {
         var embed1 = new Discord.MessageEmbed()
             .setTitle(":robot: ALL COMMANDS :robot:")
-            .setDescription(`Tutti i **comandi** disponibili all'interno di <@948153976245854229>
+            .setDescription(`Tutti i **comandi** disponibili all'interno di <@${client.application?.id}>
         
 **Prefisso** del bot: \`/\``)
             .addField("Categorie", `

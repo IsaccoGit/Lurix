@@ -1,6 +1,3 @@
-const { monthsShort } = require("moment")
-const ms = require("ms")
-
 module.exports = {
     name: "clear",
     data: {
@@ -49,16 +46,16 @@ module.exports = {
             await interaction.channel.bulkDelete(count)
 
             let embed = new Discord.MessageEmbed()
-            .setColor(configColor.VERDE)
-            .setTitle("Comando eseguito correttamente")
-            .setDescription(`Hai eliminato \`${count}\` messaggi`)
-        interaction.reply({ embeds: [embed], ephemeral: true })
+                .setColor(configColor.VERDE)
+                .setTitle("Comando eseguito correttamente")
+                .setDescription(`Hai eliminato \`${count}\` messaggi`)
+            interaction.reply({ embeds: [embed], ephemeral: true })
 
         } catch (err) {
             let emebderror = new Discord.MessageEmbed()
                 .setColor("RED")
                 .setTitle("ERRORE❌")
-                .setDescription("Non è stato possibile eliminare messaggi più vecchi di una settimana")
+                .setDescription("Non è stato possibile eliminare messaggi più vecchi di due settimane (14 giorni)")
                 .addField("Altrimenti", "Se i messaggi __**NON**__ sono più vecchi di 14 giorni segnala l'errore con `/bugreport`")
             interaction.reply({ embeds: [emebderror], ephemeral: true })
             console.log(err)

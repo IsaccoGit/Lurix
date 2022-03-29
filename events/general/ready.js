@@ -7,12 +7,6 @@ module.exports = {
             })
         })*/
 
-        // const passDb = "d5r79wQU5GrTYDye"
-
-        //const db = await MongoClient.connect(`mongodb+srv://Isacco:${process.env.passDb}@isaccocluster.r9mk6.mongodb.net/test`, { useNewUrlParser: true, useUnifiedTopology: true })
-
-        //global.database = db.db("Isacco")
-        
         client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " servers", { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
