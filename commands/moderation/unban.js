@@ -23,6 +23,7 @@ module.exports = {
         let reason = interaction.options.getString("reason") || "Nessun motivo"
         let member = interaction.guild.members.cache.get(utente);
         let memberId = interaction.guild.members.cache.get(utente.id);
+        let server = client.guilds.cache.get(interaction.guild.id);
  
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
@@ -36,7 +37,7 @@ module.exports = {
         try {
             interaction.guild.members.unban({user: utente, reason: reason })
             let embed = new Discord.MessageEmbed()
-            .setAuthor("[UNBAN] " + memberId.user.tag, memberId.user.displayAvatarURL({ dynamic: true }))
+                .setTitle("[UNBAN] " + memberId.user.tag)
                 .setColor(configColor.VERDE)
                 .addField("Reason⚠️", reason)
                 .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)

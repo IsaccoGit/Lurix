@@ -30,6 +30,7 @@ module.exports = {
         let reason = interaction.options.getString("reason") || "Nessun motivo";
         let member = interaction.guild.members.cache.get(utente.id);
         let timeInMs = ms(time)
+        let server = client.guilds.cache.get(interaction.guild.id);
 
         if (!interaction.member.permissions.has('TIMEOUT_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
@@ -48,6 +49,29 @@ module.exports = {
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
+        if (time == "0" || time == "off") {
+            let embedDm = new Discord.MessageEmbed()
+                .setTitle(`E' stato rimosso il timeout dal server: \`${server.name}\``)
+                .setColor("#6143CB")
+                .setThumbnail(server.iconURL({ dynamic: true }))
+                .addField("Reason", reason)
+                .addField("Time", time)
+                .addField("Moderator", interaction.user.username)
+            utente.send({ embeds: [embedDm] })
+
+            let embed = new Discord.MessageEmbed()
+                .setTitle("[UNTIME OUT] " + member.user.tag)
+                .setColor("#6143CB")
+                .addField("Reason⚠️", reason)
+                .addField("Time⏰", time)
+                .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+                .addField("Moderator👮", interaction.member.toString())
+                .addField("User ID: ", member.user.id)
+                .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+            interaction.reply({ embeds: [embed] })
+            member.timeout(0, reason)
+            return
+        }
 
         if (!timeInMs) {
             let embednperm = new Discord.MessageEmbed()
@@ -57,9 +81,19 @@ module.exports = {
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
+
         try {
+            let embedDm = new Discord.MessageEmbed()
+                .setTitle(`Sei stato messo in timeout dal server: \`${server.name}\``)
+                .setColor("#6143CB")
+                .setThumbnail(server.iconURL({ dynamic: true }))
+                .addField("Reason", reason)
+                .addField("Time", time)
+                .addField("Moderator", interaction.user.username)
+            utente.send({ embeds: [embedDm] })
+
             let embed = new Discord.MessageEmbed()
-                .setAuthor("[TIME OUT] " + member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+                .setTitle("[TIME OUT] " + member.user.tag)
                 .setColor("#6143CB")
                 .addField("Reason⚠️", reason)
                 .addField("Time⏰", time)
@@ -68,7 +102,10 @@ module.exports = {
                 .addField("User ID: ", member.user.id)
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
-        } catch { return }
+        } catch (err) {
+            console.log(err)
+            return
+        }
         member.timeout(timeInMs, reason)
     }
 }

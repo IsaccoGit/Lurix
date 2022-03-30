@@ -5,7 +5,7 @@ module.exports = {
         description: "Comando per visualizzare le informazioni del bot"
     },
     async execute(interaction) {
-        let server = client.guilds.cache.get("933824004836458496");
+        let server = client.guilds.cache.get(interaction.guild.id);
         let botCount = server.members.cache.filter(member => member.user.bot).size;
         let memberCount = server.memberCount - botCount;
 

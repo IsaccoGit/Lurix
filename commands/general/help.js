@@ -58,7 +58,6 @@ _Seleziona la categoria dal menù qua sotto_`)
 
         var row = new Discord.MessageActionRow()
             .addComponents(select)
-
         interaction.reply({ embeds: [embed1], components: [row] })
     }
 }

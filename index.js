@@ -10,7 +10,7 @@ global.date = new Date
 global.ms = require("ms");
 global.moment = require("moment");
 global.configColor = require("./config/color.json")
-global.checkspam = new Map()
+//global.checkspam = new Map()
 global.MongoClient = require("mongodb").MongoClient;
 client.login(process.env.TOKEN)
 const fs = require("fs");

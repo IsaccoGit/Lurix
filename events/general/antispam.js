@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
     name: `messageCreate`,
     execute(message) {
         if (checkspam.has(message.author.id)) {
@@ -57,4 +57,4 @@ module.exports = {
             })
         }
     }
-}
+}*/

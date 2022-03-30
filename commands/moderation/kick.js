@@ -22,6 +22,7 @@ module.exports = {
         let utente = interaction.options.getUser("user");
         let reason = interaction.options.getString("reason") || "Nessun motivo"
         let member = interaction.guild.members.cache.get(utente.id);
+        let server = client.guilds.cache.get(interaction.guild.id);
 
         if (!interaction.member.permissions.has('KICK_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
