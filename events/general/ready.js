@@ -7,7 +7,11 @@ module.exports = {
             })
         })*/
 
-        client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " servers", { type: "WATCHING" })
+        client.commands.forEach(async commands => {
+            const comandoRegistrato = await client.application?.commands.create(commands.data)
+        })
+
+        client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS" , { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
             .setTitle("Bot ONLINE")
@@ -18,5 +22,7 @@ module.exports = {
         //console.log("► MONGODB on line")
 
         console.log("► LURIX BOT on line");
+
+
     }
 }

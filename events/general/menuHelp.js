@@ -28,10 +28,10 @@ module.exports = {
                 description: "/meme, /gaytest, /say..."
             })
             .addOptions({
-                label: "Ranking",
-                emoji: "💵",
-                value: "helpRanking",
-                description: "/rank, /lb..."
+                label: "Owner",
+                emoji: "👑",
+                value: "helpOwner",
+                description: "/crash, /eval..."
             })
             .addOptions({
                 label: "Moderation",
@@ -42,7 +42,6 @@ module.exports = {
 
         var row = new Discord.MessageActionRow()
             .addComponents(select)
-
         switch (interaction.values[0]) {
             case "helpGeneral": {
                 var embed1 = new Discord.MessageEmbed()
@@ -56,6 +55,7 @@ module.exports = {
                     .addField("/avatar", "comando per visualizzare l'avatar di un utente")
                     .addField("/info", "comando per visualizzare le info del bot")
                     .addField("/bugreport", "comando per reportare un bug")
+                    .addField("/count-letters", "comando per contare le lettere di un testo")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -65,6 +65,9 @@ module.exports = {
                     .setTitle("📊Statistics commands📊")
                     .setColor("#BCC0C0")
                     .setDescription("Comandi per avere statistiche di utenti, canali, ruoli o altro")
+                    .addField("/serverinfo", "comando per visualizzare le informazioni di un server")
+                    .addField("/userinfo", "comando per visualizzare le informazioni di un utente")
+                    .addField("/server", "comando per visualizzare statistiche del bot")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -74,15 +77,19 @@ module.exports = {
                     .setTitle("😂Fun commands😂")
                     .setColor("#F1C40F")
                     .setDescription("Comandi fun, di divertimento e di minigames")
+                    .addField("/meme", "comando per visualizzare meme")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
         switch (interaction.values[0]) {
-            case "helpRanking": {
+            case "helpOwner": {
                 var embed1 = new Discord.MessageEmbed()
-                    .setTitle("💵Ranking commands💵")
+                    .setTitle("👑Owner commands👑")
                     .setColor("#2ECC71")
-                    .setDescription("Comandi relativi al livellamento")
+                    .setDescription("Comandi riservati all'owner")
+                    .addField("/crash 👑", "Comando per far crashare il bot, utilizzabile solo dall'owner")
+                    .addField("/eval 👑", "Comando per far eseguire un codice al bot, utilizzabile solo dall'owner")
+                    .addField("/restart 👑", "Comando per far restartare il bot, utilizzabile solo dall'owner")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -92,10 +99,9 @@ module.exports = {
                     .setTitle("🔒Moderation commands🔒")
                     .setColor("#3498DB")
                     .setDescription("Comandi di moderazione per lo staff")
-                    .addField("/crash 👑", "Comando per far crashare il bot, utilizzabile solo dall'owner")
-                    .addField("/eval 👑", "Comando per far eseguire un codice al bot, utilizzabile solo dall'owner")
-                    .addField("/restart 👑", "Comando per far restartare il bot, utilizzabile solo dall'owner")
                     .addField("/ban", "comando per bannare un utente")
+                    .addField("/unban", "comando per sbannare un utente")
+                    .addField("/clear", "comando per eliminare messaggi")
                     .addField("/timeout", "comando per mettere in time out un utente")
                     .addField("/slowmode", "comando per mettere la slowmode")
                     .addField("/kick", "comando per espellere un utente")

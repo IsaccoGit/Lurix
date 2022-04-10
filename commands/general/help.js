@@ -16,7 +16,7 @@ I comandi sono divisi nelle seguenti categorie:
 :bar_chart: Statistics
 :joy: Fun
 :dollar: Ranking    
-:lock: Moderation
+:crown: Owner
 _Seleziona la categoria dal menù qua sotto_`)
 
         var select = new Discord.MessageSelectMenu()
@@ -44,10 +44,10 @@ _Seleziona la categoria dal menù qua sotto_`)
                 description: "/meme, /gaytest, /say..."
             })
             .addOptions({
-                label: "Ranking",
-                emoji: "💵",
-                value: "helpRanking",
-                description: "/rank, /lb..."
+                label: "Owner",
+                emoji: "👑",
+                value: "helpOwner",
+                description: "/crash, /eval..."
             })
             .addOptions({
                 label: "Moderation",

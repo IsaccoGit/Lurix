@@ -49,21 +49,21 @@ module.exports = {
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
+
         if (time == "0" || time == "off") {
             let embedDm = new Discord.MessageEmbed()
                 .setTitle(`E' stato rimosso il timeout dal server: \`${server.name}\``)
                 .setColor("#6143CB")
                 .setThumbnail(server.iconURL({ dynamic: true }))
-                .addField("Reason", reason)
-                .addField("Time", time)
-                .addField("Moderator", interaction.user.username)
+                .addField("Reason⚠️", reason)
+                .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+                .addField("Moderator👮", interaction.user.username)
             utente.send({ embeds: [embedDm] })
 
             let embed = new Discord.MessageEmbed()
                 .setTitle("[UNTIME OUT] " + member.user.tag)
                 .setColor("#6143CB")
                 .addField("Reason⚠️", reason)
-                .addField("Time⏰", time)
                 .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.member.toString())
                 .addField("User ID: ", member.user.id)
@@ -87,9 +87,10 @@ module.exports = {
                 .setTitle(`Sei stato messo in timeout dal server: \`${server.name}\``)
                 .setColor("#6143CB")
                 .setThumbnail(server.iconURL({ dynamic: true }))
-                .addField("Reason", reason)
-                .addField("Time", time)
-                .addField("Moderator", interaction.user.username)
+                .addField("Reason⚠️", reason)
+                .addField("Time⏰", time)
+                .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+                .addField("Moderator👮", interaction.user.username)
             utente.send({ embeds: [embedDm] })
 
             let embed = new Discord.MessageEmbed()

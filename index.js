@@ -10,7 +10,7 @@ global.date = new Date
 global.ms = require("ms");
 global.moment = require("moment");
 global.configColor = require("./config/color.json")
-//global.checkspam = new Map()
+
 global.MongoClient = require("mongodb").MongoClient;
 client.login(process.env.TOKEN)
 const fs = require("fs");
@@ -43,24 +43,3 @@ const functionFiles = fs.readdirSync('./functions').filter(file => file.endsWith
 for (const file of functionFiles) {
     require(`./functions/${file}`);
 }
-
-
-client.on("ready", async () => {
-    client.commands.forEach(async commands => {
-        const comandoRegistrato = await client.application?.commands.create(commands.data)
-    })
-})
-
-client.on("interactionCreate", interaction => {
-    try {
-        if (interaction.bot) return
-        if (!interaction.isCommand()) return
-
-        const command = client.commands.get(interaction.commandName)
-        if (!command) return
-
-        command.execute(interaction)
-    } catch (error) {
-        console.log(error)
-    }
-});

@@ -24,7 +24,7 @@ module.exports = {
         let member = interaction.guild.members.cache.get(utente);
         let memberId = interaction.guild.members.cache.get(utente.id);
         let server = client.guilds.cache.get(interaction.guild.id);
- 
+
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")
@@ -35,7 +35,7 @@ module.exports = {
         }
 
         try {
-            interaction.guild.members.unban({user: utente, reason: reason })
+            interaction.guild.members.unban({ user: utente, reason: reason })
             let embed = new Discord.MessageEmbed()
                 .setTitle("[UNBAN] " + memberId.user.tag)
                 .setColor(configColor.VERDE)

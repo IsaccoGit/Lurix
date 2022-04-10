@@ -14,18 +14,21 @@ module.exports = {
     },
     async execute(interaction) {
         const text = interaction.options.getString("text");
-        if (text.lenght > 1500) {
-            let embed = new Discord.MessageEmbed()
+
+        if (text.length > 1000) {
+            let embed1 = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERRORE:x:")
-                .setDescription("Non puoi mandare messaggi con più di 2000 caratteri")
-            interaction.reply({ embed: [embed] })
+                .setTitle("ERRORE❌")
+                .setDescription("Non puoi mandare messaggi con `1000` o più caratteri")
+            interaction.reply({ embeds: [embed1] })
             return
         }
-        let embed = new Discord.MessageEmbed()
+        let embed2 = new Discord.MessageEmbed()
             .setColor(configColor.VERDE)
             .setTitle("Comando eseguito correttamente")
-            .setDescription(`Il tuo testo è lungo ${text.lenght} caratteri`)
-        interaction.reply({ embeds: [embed] })
+            .setDescription(`Il tuo testo è lungo \`${text.length}\` caratteri`)
+            .addField("Testo📄", `\`\`\`${text}\`\`\``)
+        interaction.reply({ embeds: [embed2] })
+
     }
 }   
