@@ -29,6 +29,6 @@ module.exports = {
             .addField(":bust_in_silhouette: User", `${interaction.user.username} (ID: ${interaction.id})`, false)
             .addField("Text", bug)
 
-        client.channels.cache.get(configId.channelsId.bugreport).send({ embeds: [embed1] });
+        client.channels.cache.get(config.channels.bugreport).send({ embeds: [embed1] });
     }
 }

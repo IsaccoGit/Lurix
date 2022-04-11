@@ -13,7 +13,7 @@ module.exports = {
         ]
     },
     execute(interaction) {
-        if(interaction.member.id !== configId.userId.ownerDiscodId) {
+        if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
@@ -39,7 +39,7 @@ module.exports = {
                 .setColor(`YELLOW`)
                 .setThumbnail(interaction.member.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
-            client.channels.cache.get(configId.channelsId.logs).send({ embeds: [embedlogs] })
+            client.channels.cache.get(config.channels.logs).send({ embeds: [embedlogs] })
 
         } catch (err) {
             let command = interaction.options.getString("code")

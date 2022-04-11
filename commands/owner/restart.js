@@ -5,7 +5,7 @@ module.exports = {
         description: "Comando per far restartare il bot"
     },
     async execute(interaction) {
-        if(interaction.member.id !== configId.userId.ownerDiscodId) {
+        if(interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
@@ -29,7 +29,7 @@ module.exports = {
         console.error(`Restart del bot...`)
         await interaction.reply({ embeds: [embed] })
 
-        await client.channels.cache.get(configId.channelsId.logs).send({ embeds: [embedlogs] });
+        await client.channels.cache.get(config.channels.logs).send({ embeds: [embedlogs] });
         process.exit()
     }
 }

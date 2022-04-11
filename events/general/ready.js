@@ -17,12 +17,10 @@ module.exports = {
             .setTitle("Bot ONLINE")
             .setColor("#3ebd45")
             .addField(":alarm_clock: Time", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
-        client.channels.cache.get(configId.channelsId.logs).send({ embeds: [embedReady] });
+        client.channels.cache.get(config.channels.logs).send({ embeds: [embedReady] });
 
         //console.log("► MONGODB on line")
 
         console.log("► LURIX BOT on line");
-
-
     }
 }

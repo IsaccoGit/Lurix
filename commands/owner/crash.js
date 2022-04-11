@@ -5,7 +5,7 @@ module.exports = {
         description: "Comando per far crashare il bot"
     },
     execute(interaction) {
-        if(interaction.member.id !== configId.userId.ownerDiscodId) {
+        if(interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
@@ -23,7 +23,7 @@ module.exports = {
             .setColor("#ff0000")
             .addField(":alarm_clock: Hai fatto crashare il bot con successo:", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
         interaction.reply({ embeds: [embed] })
-        client.channels.cache.get(configId.channelsId.logs).send({ embeds: [embedReady] });
+        client.channels.cache.get(config.channels.logs).send({ embeds: [embedReady] });
 
         setTimeout(async () => {
             await client.destroy()
