@@ -3,7 +3,9 @@ module.exports = {
     async execute(interaction) {
         if (!interaction.isButton()) return
 
-        let messageMeme = interaction.message.embeds[0].footer.text.slice(-18, 100)
+        let footerLength = interaction.message.embeds[0].footer.text.length
+
+        let messageMeme = interaction.message.embeds[0].footer.text.slice(-18, footerLength)
 
         if (interaction.user.id !== messageMeme) {
             let embednperm = new Discord.MessageEmbed()
@@ -49,13 +51,14 @@ module.exports = {
                         let memeTitle = respData[0].data.children[0].data.title;
                         let upVotes = respData[0].data.children[0].data.ups;
                         let comments = respData[0].data.children[0].data.num_comments;
+                        let footerTxT = `👍 ${upVotes} 💬 ${comments} | Requested by: ${interaction.user.username} ID: ${interaction.user.id}`
 
                         let embed = new Discord.MessageEmbed()
                             .setColor(configColor.AZZURRO)
                             .setTitle(memeTitle)
                             .setURL(memeUrl)
                             .setImage(memeFoto)
-                            .setFooter({ text: `👍 ${upVotes} 💬 ${comments} | Requested by: ${interaction.user.username} ID: ${interaction.user.id}` })
+                            .setFooter({ text: footerTxT })
 
                         let buttonGo = new Discord.MessageButton()
                             .setLabel("Avanti")
@@ -71,7 +74,7 @@ module.exports = {
                             .addComponents(buttonStop)
                             .addComponents(buttonGo);
 
-                        interaction.reply({ embeds: [embed], components: [row] });
+                        interaction.update({ embeds: [embed], components: [row] });
                     })
             } catch (err) {
                 console.log(err)

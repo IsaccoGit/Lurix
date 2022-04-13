@@ -15,14 +15,14 @@ module.exports = {
                     let memeTitle = respData[0].data.children[0].data.title;
                     let upVotes = respData[0].data.children[0].data.ups;
                     let comments = respData[0].data.children[0].data.num_comments;
+                    let footerTxT = `👍 ${upVotes} 💬 ${comments} | Requested by: ${interaction.user.username} ID: ${interaction.user.id}`
 
                     let embed = new Discord.MessageEmbed()
                         .setColor(configColor.AZZURRO)
                         .setTitle(memeTitle)
                         .setURL(memeUrl)
                         .setImage(memeFoto)
-                        .setFooter({ text: `👍 ${upVotes} 💬 ${comments} | Requested by: ${interaction.user.username} ID: ${interaction.user.id}` })
-                        //.setFooter(interaction.user.id)
+                        .setFooter({ text: footerTxT })
 
                     let buttonGo = new Discord.MessageButton()
                         .setLabel("Avanti")

@@ -9,6 +9,7 @@
   "author": "cappella_smegma#4457",
   "license": "ISC",
   "dependencies": {
+    "@discordjs/voice": "^0.8.0",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0",
     "moment": "^2.29.1",

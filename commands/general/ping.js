@@ -5,6 +5,7 @@ module.exports = {
         description: "Comando per visualizzare il ping"
     },
     execute(interaction) {
+
         var embedPing = new Discord.MessageEmbed()
             .setTitle("Pong")
             .setColor("#6CA1FF")
@@ -14,6 +15,6 @@ module.exports = {
 
         //!-----------------------------------TEST-----------------------------------!
 
-        interaction.reply({ embeds: [embedPing] })
+        interaction.reply({ embeds: [embedPing]})
     }
 }
