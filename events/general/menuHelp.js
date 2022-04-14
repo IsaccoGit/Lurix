@@ -3,6 +3,11 @@ module.exports = {
     async execute(interaction) {
         if (!interaction.isSelectMenu()) return;
 
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         var select = new Discord.MessageSelectMenu()
             .setCustomId(`helpCommandMenu`)
             .setPlaceholder('Select category...')

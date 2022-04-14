@@ -14,6 +14,10 @@ module.exports = {
     },
     async execute(interaction) {
         const text = interaction.options.getString("text");
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
 
         if (text.length > 1000) {
             let embed1 = new Discord.MessageEmbed()

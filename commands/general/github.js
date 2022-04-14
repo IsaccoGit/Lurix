@@ -5,6 +5,10 @@ module.exports = {
         description: "Comando per la repository di github del bot"
     },
     execute(interaction) {
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
         let embed = new Discord.MessageEmbed()
             .setTitle("GitHub")
             .setDescription("Link github alla **repository pubblica** del bot")

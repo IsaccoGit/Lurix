@@ -28,6 +28,11 @@ module.exports = {
         const userFlags = badge.toArray()
         const elencoBadge = userFlags.length ? userFlags.map(flag => flag).join(" ") : 'Nessun badge'
 
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         let embed = new Discord.MessageEmbed()
             .setTitle("Userstats - " + (utente.nickname ? utente.nickname : utente.user.username))
             .setDescription("Tutte le statistiche su questo utente")

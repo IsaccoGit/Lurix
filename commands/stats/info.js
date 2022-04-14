@@ -5,6 +5,12 @@ module.exports = {
         description: "Comando per visualizzare le info del bot"
     },
     execute(interaction) {
+
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         var embed = new Discord.MessageEmbed()
             .setTitle("__Info BOT__")
             .setDescription("Ecco le informazioni riguardo il bot")

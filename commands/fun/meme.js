@@ -6,6 +6,10 @@ module.exports = {
     },
     async execute(interaction) {
         try {
+            if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+                interaction.deferReply()
+                return
+            }
             fetch("https://www.reddit.com/r/memes/random/.json").then(resp =>
                 resp.json()).then(respData => {
 

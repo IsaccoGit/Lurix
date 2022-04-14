@@ -11,7 +11,7 @@ module.exports = {
             const comandoRegistrato = await client.application?.commands.create(commands.data)
         })
 
-        client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS" , { type: "WATCHING" })
+        client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS", { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
             .setTitle("Bot ONLINE")
@@ -23,5 +23,8 @@ module.exports = {
 
         console.log("► LURIX BOT on line");
 
+        //!-------------------------TEST-------------------------!
+
+        //client.api.applications(client.user.id).commands().delete();
     }
 }

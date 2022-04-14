@@ -1,6 +1,11 @@
 module.exports = {
     name: "interactionCreate",
     async execute(interaction) {
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+        
         if (!interaction.isButton()) return
 
         let footerLength = interaction.message.embeds[0].footer.text.length

@@ -13,6 +13,10 @@ module.exports = {
         ]
     },
     async execute(interaction) {
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
         let embed = new Discord.MessageEmbed()
             .setColor(configColor.VERDE)
             .setTitle("Comando eseguito correttamente")

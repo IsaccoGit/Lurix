@@ -23,26 +23,57 @@ module.exports = {
         let reason = interaction.options.getString("reason") || "Nessun motivo"
         let member = interaction.guild.members.cache.get(utente.id);
         let server = client.guilds.cache.get(interaction.guild.id);
-
-        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
-                .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
-        if (member.permissions.has('BAN_MEMBERS')) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
-                .setDescription("Non puoi bannare uno staff")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
         try {
+            if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+                interaction.deferReply()
+                return
+            }
+
+            if (member.id == client.application.id) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("ERRORE❌")
+                    .setDescription("Non puoi bannare il bot")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
+            if (member.id == interaction.user.id) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("ERRORE❌")
+                    .setDescription("Non puoi bannare te stesso")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
+            if (!member.bannable) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("ERRORE❌")
+                    .setDescription("Il bot non ha il permesso")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
+            if (!interaction.member.permissions.has('BAN_MEMBERS')) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("NON HAI IL PERMESSO❌")
+                    .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
+            if (member.permissions.has('BAN_MEMBERS')) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("NON HAI IL PERMESSO❌")
+                    .setDescription("Non puoi bannare uno staff")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
             let embedDm = new Discord.MessageEmbed()
                 .setTitle(`Sei stato bannato dal server: ${server.name}`)
                 .setColor("#6143CB")
@@ -50,7 +81,7 @@ module.exports = {
                 .addField("Reason", reason)
                 .addField("Moderator", interaction.user.username)
             member.send({ embed: [embedDm] })
-            
+
             let embed = new Discord.MessageEmbed()
                 .setAuthor("[BAN] " + member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
                 .setColor("#6143CB")
@@ -60,7 +91,16 @@ module.exports = {
                 .addField("User ID: ", member.user.id)
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
-        } catch { return }
-        await member.ban({ reason: reason })
+            member.ban({ reason: reason })
+
+        } catch (err) {
+            console.log(err)
+            let embednperm = new Discord.MessageEmbed()
+                .setTitle("ERRORE❌")
+                .setDescription("C'è stato un errore nell'eseguzionde del comando")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
     }
 }

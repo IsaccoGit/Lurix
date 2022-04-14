@@ -24,6 +24,11 @@ module.exports = {
             var lvlboost = "0"
         }
 
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         let embed = new Discord.MessageEmbed()
             .setTitle(server.name)
             .setDescription("Tutte le statistiche su questo server")

@@ -25,6 +25,20 @@ module.exports = {
         let memberId = interaction.guild.members.cache.get(utente.id);
         let server = client.guilds.cache.get(interaction.guild.id);
 
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
+        if (!member.bannable) {
+            let embednperm = new Discord.MessageEmbed()
+                .setTitle("ERRORE❌")
+                .setDescription("Il bot non ha il permesso")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")

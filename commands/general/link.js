@@ -5,6 +5,10 @@ module.exports = {
         description: "Comando per visualizzare i link importandi"
     },
     async execute(interaction) {
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
         var embed = new Discord.MessageEmbed()
             .setTitle("__Link IMPORTANTI__")
             .addField("Link bot", "Clicca [qui](https://discord.com/api/oauth2/authorize?client_id=958268971478556743&permissions=8&scope=bot%20applications.commands) per invitare il bot")

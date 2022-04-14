@@ -13,6 +13,16 @@ module.exports = {
         ]
     },
     async execute(interaction) {
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
+        if (!interaction.guild.me.permissions.has("DELETE_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         if (!interaction.member.permissions.has("ADMINISTRATOR")) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")

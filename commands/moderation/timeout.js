@@ -32,6 +32,29 @@ module.exports = {
         let timeInMs = ms(time)
         let server = client.guilds.cache.get(interaction.guild.id);
 
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
+        if (!member.timeoutable) {
+            let embednperm = new Discord.MessageEmbed()
+                .setTitle("ERRORE❌")
+                .setDescription("Il bot non ha il permesso")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
+        if (member.id == interaction.user.id) {
+            let embednperm = new Discord.MessageEmbed()
+                .setTitle("ERRORE❌")
+                .setDescription("Non puoi mettere in timeout te stesso")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
         if (!interaction.member.permissions.has('TIMEOUT_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")

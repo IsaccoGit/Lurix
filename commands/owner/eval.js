@@ -13,6 +13,12 @@ module.exports = {
         ]
     },
     execute(interaction) {
+
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
         if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO❌")

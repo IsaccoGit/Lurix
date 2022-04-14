@@ -1,3 +1,5 @@
+const { ThreadChannel } = require("discord.js")
+
 //client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS" , { type: "WATCHING" })
 module.exports = {
     name: "manage",
@@ -13,15 +15,15 @@ module.exports = {
                 choices: [
                     {
                         name: 'on line',
-                        value: 'on-line.'
+                        value: 'on line'
                     },
                     {
                         name: 'idle',
-                        value: 'idle.'
+                        value: 'idle'
                     },
                     {
                         name: 'dnd',
-                        value: 'dnd.'
+                        value: 'dnd'
                     },
                 ],
             },
@@ -33,15 +35,11 @@ module.exports = {
                 choices: [
                     {
                         name: 'WATCHING',
-                        value: 'watching.'
+                        value: 'WATCHING'
                     },
                     {
                         name: 'PLAYING',
-                        value: 'playing.'
-                    },
-                    {
-                        name: 'STREAMING',
-                        value: 'streaming.'
+                        value: 'PLAYING'
                     },
                 ],
             },
@@ -56,10 +54,47 @@ module.exports = {
     async execute(interaction) {
         let status = interaction.options.getString("status")
         let activities = interaction.options.getString("activities")
-        let activitiesText = interaction.options.getString("activitiesText")
+        var activities_text = interaction.options.getString("activities-text") || ""
 
-        console.log(status)
-        console.log(activities)
-        console.log(activitiesText)
+
+        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+            interaction.deferReply()
+            return
+        }
+
+        if (interaction.member.id !== config.user.ownerDiscodId) {
+            var embednperm = new Discord.MessageEmbed()
+                .setTitle("NON HAI IL PERMESSO❌")
+                .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
+        if (activities_text == "BASE_STATUS") {
+            var activities_text = "/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS"
+        }
+
+        client.user.setActivity(activities_text, { type: activities })
+        client.user.setStatus(status)
+
+        switch (status) {
+            case "on line": status = "Online"; break;
+            case "dnd": status = "Don't disturb"; break;
+            case "idle": status = "Idle"; break;
+        }
+
+        switch (activities) {
+            case "PLAYING" : activities = "Playing"; break;
+            case "WATCHING" : activities = "Watching"; break;
+        }
+        let embed = new Discord.MessageEmbed()
+            .setColor("#7400ff")
+            .setTitle("Bot maneggiato🛠️")
+            .addField("Status🎯", "`" + status + "`")
+            .addField("Attività🎮", "`" + activities + "`")
+            .addField("Testo attività📄", "`" + activities_text + "`")
+        interaction.reply({ embeds: [embed] })
+
     }
 }
