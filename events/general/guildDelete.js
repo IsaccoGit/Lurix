@@ -15,7 +15,7 @@ module.exports = {
             var lvlboost = "0"
         }
 
-        let canale = client.channels.cache.get(config.channels.guild_join)
+        let canale = client.channels.cache.get(config.channels.guild_leave)
         let embed = new Discord.MessageEmbed()
             .setColor(configColor.FUSCHIA)
             .setTitle("Leave server⬇️")

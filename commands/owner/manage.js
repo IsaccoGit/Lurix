@@ -54,7 +54,7 @@ module.exports = {
     async execute(interaction) {
         let status = interaction.options.getString("status")
         let activities = interaction.options.getString("activities")
-        var activities_text = interaction.options.getString("activities-text") || ""
+        var activities_text = interaction.options.getString("activities-text") || "LURIX"
 
 
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
@@ -88,6 +88,9 @@ module.exports = {
             case "PLAYING" : activities = "Playing"; break;
             case "WATCHING" : activities = "Watching"; break;
         }
+        
+        if (!activities_text) activities_text = " "
+
         let embed = new Discord.MessageEmbed()
             .setColor("#7400ff")
             .setTitle("Bot maneggiato🛠️")

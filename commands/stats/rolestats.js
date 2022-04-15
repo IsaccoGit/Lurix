@@ -33,6 +33,7 @@ module.exports = {
                 }
             }
         }
+        
         let embed = new Discord.MessageEmbed()
             .setTitle("Role stats")
             .setColor("#009cff")

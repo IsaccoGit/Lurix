@@ -10,7 +10,7 @@ module.exports = {
         client.commands.forEach(async commands => {
             const comandoRegistrato = await client.application?.commands.create(commands.data)
         })
-
+        
         client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS", { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
