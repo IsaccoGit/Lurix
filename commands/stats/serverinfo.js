@@ -35,7 +35,7 @@ module.exports = {
             .setThumbnail(server.iconURL({ dynamic: true }))
             //.addField(":green_circle: Online users", "```" + server.members.cache.filter(user => !user?.presence?.status || user.presence.status != "offline").size + "```", true)
             .addField(":placard: Server ID", "```" + server.id + "```", true)
-            .addField(":beginner: Boost level", "```Level " + lvlboost + " (" + server.premiumSubscriptionCount + " boost)```", true)
+            .addField("🔰 Boost level", "```Level " + lvlboost + " (" + server.premiumSubscriptionCount + " boost)```", true)
             .addField(":busts_in_silhouette: Members", "```Total: " + server.memberCount + " | Members: " + memberCount + " | Bots: " + botCount + "```", false)
             .addField(":loud_sound: Server categories and channels", "```Category: " + categoryCount + " | Text: " + textCount + " | Voice: " + vocalCount + "```", false)
             .addField(":calendar_spiral: Server created", "```" + moment(server.createdAt).format("ddd DD MMM YYYY, HH:mm") + " (" + moment(server.createdAt).fromNow() + ")```", false)
