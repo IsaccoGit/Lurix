@@ -14,11 +14,11 @@ module.exports = {
             .addField("Members", "`" + guild.members.cache.size.toString() + "`")
             .addField("User", memberCount, true)
             .addField("Bot", botCount, true)
-            .addField("Channel", "`" + guild.channels.cache.size)
+            /*.addField("Channel", "`" + guild.channels.cache.size)
             .addField("Canali testuali", "`" + guild.channels.cache.filter(c => c.type == "GUILD_TEXT").size, true)
             .addField("Canali vocali", "`" + guild.channels.cache.filter(c => c.type == "GUILD_VOICE").size, true)
             .addField(":calendar_spiral: Server created", "```" + moment(guild.createdAt).format("ddd DD MMM YYYY, HH:mm") + " (" + moment(guild.createdAt).fromNow() + ")```", false)
-            .setThumbnail(guild.iconURL({ dynamic: true }))
+            .setThumbnail(guild.iconURL({ dynamic: true }))*/
             .setTimestamp()
         canale.send({ embeds: [embed] })
 

@@ -1,4 +1,4 @@
-module.exports = {
+/*module.exports = {
     name: "guildDelete",
     async execute(guild) {
         let botCount = guild.members.cache.filter(member => member.user.bot).size;
@@ -22,4 +22,4 @@ module.exports = {
             .setTimestamp()
         canale.send({ embeds: [embed] })
     }
-}
+}*/
