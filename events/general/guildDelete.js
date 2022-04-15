@@ -1,14 +1,14 @@
 module.exports = {
-    name: "guildCreate",
+    name: "guildDelete",
     async execute(guild) {
         let botCount = guild.members.cache.filter(member => member.user.bot).size;
         let memberCount = guild.memberCount - botCount;
 
         let canale = client.channels.cache.get(config.channels.guild_join)
         let embed = new Discord.MessageEmbed()
-            .setColor(configColor.VERDE_ACQUA)
-            .setTitle("New server")
-            .setDescription("Il bot è stato aggiunto in un nuovo server")
+            .setColor(configColor.BLU_GRIGO_SCURO)
+            .setTitle("Leave server")
+            .setDescription("Il bot è stato rimosso da un server")
             .addField("Name", "`" + guild.name + "`")
             .addField("Server ID","`" + guild.id + "`")
             .addField("Members", "`" + guild.members.cache.size + "`")
@@ -21,7 +21,5 @@ module.exports = {
             .setThumbnail(guild.iconURL({ dynamic: true }))
             .setTimestamp()
         canale.send({ embeds: [embed] })
-
-        console.log(guild)
     }
 }
