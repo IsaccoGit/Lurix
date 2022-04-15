@@ -11,7 +11,7 @@ module.exports = {
             .setDescription("Il bot è stato aggiunto in un nuovo server")
             .addField("Name", "`" + guild.name + "`")
             .addField("Server ID","`" + guild.id + "`")
-            .addField("Members", "`" + guild.members.cache.size + "`")
+            .addField("Members", "`" + guild.members.cache.size.toString() + "`")
             .addField("User", memberCount, true)
             .addField("Bot", botCount, true)
             .addField("Channel", "`" + guild.channels.cache.size)
