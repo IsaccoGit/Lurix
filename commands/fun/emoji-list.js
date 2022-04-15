@@ -18,7 +18,7 @@ module.exports = {
             .setColor("#6143CB")
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
             .setTitle(`Emoji del server`)
-            //.setDescription()
+            .setDescription("In arrivo...")
             .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp()
         interaction.reply({ embeds: [embed] })
