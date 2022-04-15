@@ -25,7 +25,7 @@ module.exports = {
 
         //!-------------------------TEST-------------------------!
 
-        let server = client.guilds.cache.get("933824004836458496");
+        //let server = client.guilds.cache.get("933824004836458496");
 
         //client.api.applications(client.user.id).commands().delete();
     }
