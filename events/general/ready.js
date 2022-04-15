@@ -14,7 +14,7 @@ module.exports = {
         client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS", { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
-            .setTitle("Bot ONLINE")
+            .setTitle(`Bot ONLINE - ${process.env.local ? `Local` : `Host`}`)
             .setColor("#3ebd45")
             .addField(":alarm_clock: Time", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
         client.channels.cache.get(config.channels.logs).send({ embeds: [embedReady] });
