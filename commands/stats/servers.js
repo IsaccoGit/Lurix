@@ -18,7 +18,7 @@ module.exports = {
             .setDescription("Tutti i server in cui è presente il bot")
             .addField("Servers 💻", client.guilds.cache.size.toString())
             .addField("Members 👥", client.users.cache.size.toString())
-            .setFooter({ text: server.name, iconURL: "https://cdn.discordapp.com/attachments/885923288554037290/962396566247850104/Server_logo.png" })
+            .setFooter({ text: server.name, iconURL: server.iconURL })
             .setTimestamp()
         interaction.reply({ embeds: [embed] })
     }
