@@ -64,18 +64,29 @@ module.exports = {
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
-        
-        try {
-            let embed = new Discord.MessageEmbed()
-                .setAuthor("[KICK] " + member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
-                .setColor("#6143CB")
-                .addField("Reason⚠️", reason)
-                .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
-                .addField("Moderator👮", interaction.member.toString())
-                .addField("User ID: ", member.user.id)
-                .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            interaction.reply({ embeds: [embed] })
-        } catch { return }
-        await member.kick({ reason: reason })
+
+        let dm = true
+
+        let embedDm = new Discord.MessageEmbed()
+            .setTitle(`Sei stato kikkato dal server: \`${server.name}\``)
+            .setColor("#6143CB")
+            .setThumbnail(server.iconURL({ dynamic: true }))
+            .addField("Reason⚠️", reason)
+            .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+            .addField("Moderator👮", interaction.member.toString())
+        member.send({ embeds: [embedDm] }).catch(() => { dm = false })
+
+        let embed = new Discord.MessageEmbed()
+            .setAuthor({ name: "[KICK] " + member.user.tag, iconUrl: member.user.displayAvatarURL({ dynamic: true }) })
+            .setColor("#6143CB")
+            .addField("Reason⚠️", reason)
+            .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+            .addField("Moderator👮", interaction.member.toString())
+            .addField("User ID: ", member.user.id)
+        if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
+            .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
+        interaction.reply({ embeds: [embed] })
+
+        member.kick({ reason: reason })
     }
 }

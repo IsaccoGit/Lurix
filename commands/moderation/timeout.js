@@ -74,6 +74,8 @@ module.exports = {
         }
 
         if (time == "0" || time == "off") {
+            let dm = true
+
             let embedDm = new Discord.MessageEmbed()
                 .setTitle(`E' stato rimosso il timeout dal server: \`${server.name}\``)
                 .setColor("#6143CB")
@@ -81,7 +83,7 @@ module.exports = {
                 .addField("Reason⚠️", reason)
                 .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.user.username)
-            utente.send({ embeds: [embedDm] })
+            utente.send({ embeds: [embedDm] }).catch(() => { dm = false })
 
             let embed = new Discord.MessageEmbed()
                 .setTitle("[UNTIME OUT] " + member.user.tag)
@@ -90,6 +92,7 @@ module.exports = {
                 .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.member.toString())
                 .addField("User ID: ", member.user.id)
+                if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
             member.timeout(0, reason)
@@ -106,6 +109,8 @@ module.exports = {
         }
 
         try {
+            let dm = true
+
             let embedDm = new Discord.MessageEmbed()
                 .setTitle(`Sei stato messo in timeout dal server: \`${server.name}\``)
                 .setColor("#6143CB")
@@ -114,7 +119,7 @@ module.exports = {
                 .addField("Time⏰", time)
                 .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.user.username)
-            utente.send({ embeds: [embedDm] })
+            utente.send({ embeds: [embedDm] }).catch(() => { dm = false })
 
             let embed = new Discord.MessageEmbed()
                 .setTitle("[TIME OUT] " + member.user.tag)
@@ -124,6 +129,7 @@ module.exports = {
                 .addField("Ora", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.member.toString())
                 .addField("User ID: ", member.user.id)
+                if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
         } catch (err) {

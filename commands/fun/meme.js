@@ -6,10 +6,13 @@ module.exports = {
     },
     async execute(interaction) {
         try {
+            //TODO controlli
             if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
                 interaction.deferReply()
                 return
             }
+
+            //TODO creazione meme
             fetch("https://www.reddit.com/r/memes/random/.json").then(resp =>
                 resp.json()).then(respData => {
 
@@ -21,12 +24,16 @@ module.exports = {
                     let comments = respData[0].data.children[0].data.num_comments;
                     let footerTxT = `👍 ${upVotes} 💬 ${comments} | Requested by: ${interaction.user.username} ID: ${interaction.user.id}`
 
+                    //TODO embed
+
                     let embed = new Discord.MessageEmbed()
                         .setColor(configColor.AZZURRO)
                         .setTitle(memeTitle)
                         .setURL(memeUrl)
                         .setImage(memeFoto)
                         .setFooter({ text: footerTxT })
+
+                    //TODO buttons
 
                     let buttonGo = new Discord.MessageButton()
                         .setLabel("Avanti")
@@ -42,6 +49,7 @@ module.exports = {
                         .addComponents(buttonStop)
                         .addComponents(buttonGo);
 
+                    //TODO invio messaggio
                     interaction.reply({ embeds: [embed], components: [row] });
                 })
         } catch (err) {

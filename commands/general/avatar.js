@@ -13,12 +13,15 @@ module.exports = {
         ]
     },
     execute(interaction) {
+        //TODO definizioni
         let utente = interaction.options.getUser("user") || interaction.user;
         let member = interaction.guild.members.cache.get(utente.id);
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
             interaction.deferReply()
             return
         }
+
+        //TODO invio messaggi
 
         var embed = new Discord.MessageEmbed()
             .setTitle("Avatar - " + (utente.username))

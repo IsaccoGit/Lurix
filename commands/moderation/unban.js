@@ -49,7 +49,17 @@ module.exports = {
         }
 
         try {
-            interaction.guild.members.unban({ user: utente, reason: reason })
+            let dm = true
+
+            let embedDm = new Discord.MessageEmbed()
+                .setTitle(`Sei stato sbannato dal server: \`${server.name}\``)
+                .setColor("#6143CB")
+                .setThumbnail(server.iconURL({ dynamic: true }))
+                .addField("Reason⚠️", reason)
+                .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+                .addField("Moderator👮", interaction.member.toString())
+            member.send({ embeds: [embedDm] }).catch(() => { dm = false })
+
             let embed = new Discord.MessageEmbed()
                 .setTitle("[UNBAN] " + memberId.user.tag)
                 .setColor(configColor.VERDE)
@@ -57,8 +67,10 @@ module.exports = {
                 .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.member.toString())
                 .addField("User ID: ", member.user.id)
+            if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            await interaction.reply({ embeds: [embed] })
+            interaction.reply({ embeds: [embed] })
+            interaction.guild.members.unban({ user: utente, reason: reason })
 
         } catch (err) {
             let embederr = new Discord.MessageEmbed()

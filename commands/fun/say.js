@@ -13,18 +13,35 @@ module.exports = {
         ]
     },
     async execute(interaction) {
+        //TODO text
+        let text = interaction.options.getString("text");
+
+        //TODO controlli
+
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
             interaction.deferReply()
             return
         }
+
+        if (text.includes("@everyone") || message.content.includes("@here")) {
+            let embed1 = new Discord.MessageEmbed()
+                .setColor("RED")
+                .setTitle("ERRORE❌")
+                .setDescription("Non puoi taggare everyone e here")
+            interaction.reply({ embeds: [embed1] })
+            return
+        }
+        
+        //TODO invio messaggio
+
         let embed = new Discord.MessageEmbed()
             .setColor(configColor.VERDE)
             .setTitle("Comando eseguito correttamente")
             .setDescription("Comando say eseguito correttamente")
         interaction.reply({ embeds: [embed], ephemeral: true })
 
-        const text = interaction.options.getString("text");
         let canale = client.channels.cache.get(interaction.channel.id);
+        
         canale.send(text)
     }
 }

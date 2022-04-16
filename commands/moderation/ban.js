@@ -22,6 +22,7 @@ module.exports = {
         let utente = interaction.options.getUser("user");
         let reason = interaction.options.getString("reason") || "Nessun motivo"
         let member = interaction.guild.members.cache.get(utente.id);
+
         let server = client.guilds.cache.get(interaction.guild.id);
         try {
             if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
@@ -29,7 +30,7 @@ module.exports = {
                 return
             }
 
-            if (member.id == client.application.id) {
+            /*if (member.id == client.application.id) {
                 let embednperm = new Discord.MessageEmbed()
                     .setTitle("ERRORE❌")
                     .setDescription("Non puoi bannare il bot")
@@ -72,23 +73,27 @@ module.exports = {
                     .setColor("RED")
                 interaction.reply({ embeds: [embednperm], ephemeral: true })
                 return
-            }
+            }*/
+
+            let dm = true
 
             let embedDm = new Discord.MessageEmbed()
-                .setTitle(`Sei stato bannato dal server: ${server.name}`)
+                .setTitle(`Sei stato bannato dal server: \`${server.name}\``)
                 .setColor("#6143CB")
                 .setThumbnail(server.iconURL({ dynamic: true }))
-                .addField("Reason", reason)
-                .addField("Moderator", interaction.user.username)
-            member.send({ embed: [embedDm] })
+                .addField("Reason⚠️", reason)
+                .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+                .addField("Moderator👮", interaction.member.toString())
+            member.send({ embeds: [embedDm] }).catch(() => { dm = false })
 
             let embed = new Discord.MessageEmbed()
-                .setAuthor("[BAN] " + member.user.tag, member.user.displayAvatarURL({ dynamic: true }))
+                .setAuthor({ name: "[BAN] " + member.user.tag, iconURL: member.user.displayAvatarURL({ dynamic: true }) })
                 .setColor("#6143CB")
                 .addField("Reason⚠️", reason)
                 .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
                 .addField("Moderator👮", interaction.member.toString())
                 .addField("User ID: ", member.user.id)
+                if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
                 .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
             interaction.reply({ embeds: [embed] })
             member.ban({ reason: reason })
