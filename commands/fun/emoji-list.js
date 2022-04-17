@@ -24,13 +24,14 @@ module.exports = {
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
             .setTitle(`Emoji del server <a:coco:965152715753803818> `)
             .setDescription(`Tutte le emoji del server: **${server.name}**`)
-            server.forEach(server => { 
+            /*server.forEach(server => { 
                 if(Emoji == "animated"){
                     let a = `a`
                 } else a = ""
                 embed.addField(Emoji, `<${a}:${Emoji.name}:${Emoji.id}>`)
-            })
+            })*/
             console.log(Emoji)
+            console.log(server)
             .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp()
         interaction.reply({ embeds: [embed] })
