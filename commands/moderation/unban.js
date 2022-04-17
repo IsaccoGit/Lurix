@@ -74,7 +74,7 @@ module.exports = {
 
         } catch (err) {
             let embederr = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<:warn:965152728240254976>")
                 .setDescription("C'è stato un errore, verifica che l'id dell'utente sia corretto")
                 .setColor("RED")
             interaction.reply({ embeds: [embederr], ephemeral: true })

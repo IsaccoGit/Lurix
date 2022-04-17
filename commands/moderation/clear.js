@@ -19,13 +19,17 @@ module.exports = {
         }
 
         if (!interaction.guild.me.permissions.has("DELETE_MESSAGE")) {
-            interaction.deferReply()
+            var embednperm = new Discord.MessageEmbed()
+                .setTitle("NON HO IL PERMESSO<:warn:965152728240254976>")
+                .setDescription("Non ho il permesso di eliminare messaggi")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
 
         if (!interaction.member.permissions.has("ADMINISTRATOR")) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -37,7 +41,7 @@ module.exports = {
         if (count < 1) {
             let embed = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("Numero non valido")
+                .setTitle("Numero non valido<:warn:965152728240254976>")
                 .setDescription("I messaggi da eliminare devono essere maggiori a 1")
                 .setTimestap()
             await interaction.reply({ embeds: [embed], ephemeral: true })
@@ -57,7 +61,7 @@ module.exports = {
 
             let embed = new Discord.MessageEmbed()
                 .setColor(configColor.VERDE)
-                .setTitle("Comando eseguito correttamente")
+                .setTitle("Comando eseguito correttamente<a:right:965152774532771850>")
                 .setDescription(`Hai eliminato \`${count}\` messaggi`)
             interaction.reply({ embeds: [embed], ephemeral: true })
 

@@ -31,7 +31,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setTitle(":beetle: Bug reportato :beetle:")
             .setColor("#77B256")
-            .setDescription(`**Grazie** per aver segnalato questo problema. È già stato **consegnato** allo staff che lo **risolverà** a breve`)
+            .setDescription(`<a:right:965152774532771850>**Grazie** per aver segnalato questo problema. È già stato **consegnato** allo staff che lo **risolverà** a breve`)
             .addField(":page_facing_up: Text", bug)
         interaction.reply({ embeds: [embed] })
 

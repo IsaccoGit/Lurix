@@ -9,18 +9,28 @@ module.exports = {
             interaction.deferReply()
             return
         }
+
+        if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
+            var embednperm = new Discord.MessageEmbed()
+                .setTitle("NON HO IL PERMESSO<:warn:965152728240254976>")
+                .setDescription("Non ho il permesso di modificare i messaggi")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
         var embed1 = new Discord.MessageEmbed()
             .setTitle(":robot: ALL COMMANDS :robot:")
             .setDescription(`Tutti i **comandi** disponibili all'interno di <@${client.application?.id}>
         
-**Prefisso** del bot: \`/\``)
+<a:arrowr:965152788738879528>**Prefisso** del bot: \`/\``)
             .addField("Categorie", `
 I comandi sono divisi nelle seguenti categorie:
-:earth_americas: General
-:bar_chart: Statistics
-:joy: Fun
-:dollar: Ranking    
-:crown: Owner
+> :earth_americas: General
+> :bar_chart: Statistics
+> :joy: Fun
+> :dollar: Ranking    
+> :crown: Owner
 _Seleziona la categoria dal menù qua sotto_`)
 
         var select = new Discord.MessageSelectMenu()

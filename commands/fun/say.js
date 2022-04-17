@@ -23,7 +23,7 @@ module.exports = {
             return
         }
 
-        if (text.includes("@everyone") || message.content.includes("@here")) {
+        if (text.includes("@everyone") || text.includes("@here")) {
             let embed1 = new Discord.MessageEmbed()
                 .setColor("RED")
                 .setTitle("ERRORE❌")
@@ -36,7 +36,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setColor(configColor.VERDE)
-            .setTitle("Comando eseguito correttamente")
+            .setTitle("Comando eseguito correttamente <a:right:965152774532771850>")
             .setDescription("Comando say eseguito correttamente")
         interaction.reply({ embeds: [embed], ephemeral: true })
 

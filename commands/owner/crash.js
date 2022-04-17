@@ -12,19 +12,19 @@ module.exports = {
         
         if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
         const embedReady = new Discord.MessageEmbed()
-            .setTitle("Bot CRASHATO")
+            .setTitle("Bot CRASHATO<:warn:965152728240254976>")
             .setColor("#ff0000")
             .addField(":alarm_clock: Time", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
 
         const embed = new Discord.MessageEmbed()
-            .setTitle("BOT crashato con successo")
+            .setTitle("BOT crashato con successo<a:verify:965154403885670401>")
             .setColor("#ff0000")
             .addField(":alarm_clock: Hai fatto crashare il bot con successo:", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
         interaction.reply({ embeds: [embed] })

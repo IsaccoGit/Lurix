@@ -14,14 +14,12 @@ module.exports = {
             return
         }
 
-        console.log(server)
-
         //TODO invio messaggio
 
         let embed = new Discord.MessageEmbed()
             .setColor("#6143CB")
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
-            .setTitle(`Emoji del server`)
+            .setTitle(`Emoji del server <a:coco:965152715753803818> `)
             .setDescription("In arrivo...")
             .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp()

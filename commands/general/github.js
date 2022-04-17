@@ -10,7 +10,7 @@ module.exports = {
             return
         }
         let embed = new Discord.MessageEmbed()
-            .setTitle("GitHub")
+            .setTitle("GitHub <a:verify:965154403885670401>")
             .setDescription("Link github alla **repository pubblica** del bot")
             .addField("<:Botlogo:949293564192510002> Lurix Bot", `
 [Clicca qui](https://github.com/IsaccoGit/Lurix) - Tutto il codice open-source del bot.`)

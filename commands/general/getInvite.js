@@ -22,7 +22,7 @@ module.exports = {
         if (!interaction.guild.me.permissions.has("CREATE_INSTANT_INVITE")) {
             let embedErr = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERORE❌")
+                .setTitle("ERORE<:warn:965152728240254976>")
                 .setDescription("Non ho il permesso di creare inviti")
             interaction.reply({ embeds: [embedErr], ephemeral: true })
             return
@@ -31,7 +31,7 @@ module.exports = {
         if (!interaction.member.permissions.has("CREATE_INSTANT_INVITE")) {
             let embedErr = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERORE❌")
+                .setTitle("ERORE<:warn:965152728240254976>")
                 .setDescription("Non hai il permesso di creare inviti")
             interaction.reply({ embeds: [embedErr], ephemeral: true })
             return
@@ -45,7 +45,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setColor(configColor.VERDE)
-            .setTitle("Nuovo invito")
+            .setTitle("Nuovo invito<a:right:965152774532771850>")
             .setDescription(`Un nuovo invito è stato creato nel server **${server.name}**`)
             .addField("Invito🪧", invite.url)
             .addField("Server🖥️", "```" + server.name + "```")

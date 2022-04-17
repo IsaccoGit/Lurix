@@ -52,6 +52,7 @@ module.exports = {
         ],
     },
     async execute(interaction) {
+        let server = client.guilds.cache.get(interaction.guild.id)
         let status = interaction.options.getString("status")
         let activities = interaction.options.getString("activities")
         var activities_text = interaction.options.getString("activities-text") || "LURIX"
@@ -64,7 +65,7 @@ module.exports = {
 
         if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -85,19 +86,26 @@ module.exports = {
         }
 
         switch (activities) {
-            case "PLAYING" : activities = "Playing"; break;
-            case "WATCHING" : activities = "Watching"; break;
+            case "PLAYING": activities = "Playing"; break;
+            case "WATCHING": activities = "Watching"; break;
         }
-        
-        if (!activities_text) activities_text = " "
 
         let embed = new Discord.MessageEmbed()
             .setColor("#7400ff")
             .setTitle("Bot maneggiato🛠️")
-            .addField("Status🎯", "`" + status + "`")
-            .addField("Attività🎮", "`" + activities + "`")
-            .addField("Testo attività📄", "`" + activities_text + "`")
+            .addField("Status🎯", "```" + status + "```")
+            .addField("Attività🎮", "```" + activities + "```")
+            .addField("Testo attività📄", "```" + activities_text + "```")
         interaction.reply({ embeds: [embed] })
 
+        let embedLogs = new Discord.MessageEmbed()
+            .setColor("#7400ff")
+            .setTitle("Bot maneggiato🛠️")
+            .addField("Server🖥️", "```Name: " + server.name.toString() + " | ID:" + interaction.guild.id + "```")
+            .addField("Time⏰", "```" + moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")+ "```")
+            .addField("Status🎯", "```" + status + "```")
+            .addField("Attività🎮", "```" + activities + "```")
+            .addField("Testo attività📄", "```" + activities_text + "```")
+        client.channels.cache.get(config.channels.logs).send({ embeds: [embedLogs] })
     }
 }

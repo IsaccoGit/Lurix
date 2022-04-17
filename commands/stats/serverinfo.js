@@ -31,7 +31,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setTitle(server.name)
-            .setDescription("Tutte le statistiche su questo server")
+            .setDescription("Tutte le statistiche su questo server<:information:965163341989437451>")
             .setThumbnail(server.iconURL({ dynamic: true }))
             //.addField(":green_circle: Online users", "```" + server.members.cache.filter(user => !user?.presence?.status || user.presence.status != "offline").size + "```", true)
             .addField(":placard: Server ID", "```" + server.id + "```", true)

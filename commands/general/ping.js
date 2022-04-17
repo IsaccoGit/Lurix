@@ -19,6 +19,6 @@ module.exports = {
 
         //!-----------------------------------TEST-----------------------------------!
 
-        interaction.reply({ embeds: [embedPing]})
+        interaction.reply({ embeds: [embedPing], ephemeral: true })
     }
 }

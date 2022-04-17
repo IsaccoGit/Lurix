@@ -101,7 +101,7 @@ module.exports = {
         } catch (err) {
             console.log(err)
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<:warn:965152728240254976>")
                 .setDescription("C'è stato un errore nell'eseguzionde del comando")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })

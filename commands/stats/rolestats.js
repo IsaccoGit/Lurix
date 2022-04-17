@@ -35,7 +35,7 @@ module.exports = {
         }
     
         let embed = new Discord.MessageEmbed()
-            .setTitle("Role stats")
+            .setTitle("Role stats<:information:965163341989437451>")
             .setColor("#009cff")
             .setDescription("Tutte le statistiche di questo ruolo")
             .addField("Role", "<@&" + ruolo.id + ">")

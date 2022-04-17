@@ -35,7 +35,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setTitle("Userstats - " + (utente.nickname ? utente.nickname : utente.user.username))
-            .setDescription("Tutte le statistiche su questo utente")
+            .setDescription("Tutte le statistiche su questo utente<:information:965163341989437451>")
             .setThumbnail(utente.user.displayAvatarURL({ dynamic: true }))
             .addField(":receipt: User ID", "```" + utente.user.id + "```", true)
             .addField(":ok_hand: Status", "```" + (status || "Offline") + "```", true)

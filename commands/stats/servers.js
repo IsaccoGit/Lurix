@@ -15,7 +15,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setColor("#6CA1FF")
             .setTitle("Servers")
-            .setDescription("Tutti i server in cui è presente il bot")
+            .setDescription("Tutti i server in cui è presente il bot<:information:965163341989437451>")
             .addField("Servers 💻", client.guilds.cache.size.toString())
             .addField("Members 👥", client.users.cache.size.toString())
             .setFooter({ text: server.name, iconURL: server.iconURL({ dynamic: true }) })

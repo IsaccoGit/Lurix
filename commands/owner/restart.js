@@ -12,7 +12,7 @@ module.exports = {
         
         if(interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -20,7 +20,7 @@ module.exports = {
         }
 
         let embed = new Discord.MessageEmbed()
-            .setTitle(`Restart`)
+            .setTitle(`Restart<a:verify:965154403885670401>`)
             .setDescription(`Il bot è in fase di **restart**!!\nA breve tornerà online!`)
             .setColor(`RED`)
         let embedlogs = new Discord.MessageEmbed()
