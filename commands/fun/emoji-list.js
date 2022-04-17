@@ -6,7 +6,8 @@ module.exports = {
     },
     async execute(interaction) {
         //TODO server
-        let server = client.guilds.cache.get(interaction.guild.id);
+        let serverId = interaction.guild.id
+        let server = client.guilds.cache.get(serverId);
         let Emoji = server.emoji
 
         //TODO controlli
@@ -22,7 +23,7 @@ module.exports = {
             .setColor("#6143CB")
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
             .setTitle(`Emoji del server <a:coco:965152715753803818> `)
-            .setDescription("In arrivo...")
+            .setDescription(`Tutte le emoji del server: **${server.name}**`)
             server.forEach(server => { 
                 if(Emoji == "animated"){
                     let a = `a`
