@@ -51,7 +51,7 @@ module.exports = {
         if (count > 100) {
             let emebderror = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<:warn:965152728240254976>")
                 .setDescription("Il limite di messaggi da eliminare è `100`")
             interaction.reply({ embeds: [emebderror], ephemeral: true })
             return
@@ -63,12 +63,12 @@ module.exports = {
                 .setColor(configColor.VERDE)
                 .setTitle("Comando eseguito correttamente<a:right:965152774532771850>")
                 .setDescription(`Hai eliminato \`${count}\` messaggi`)
-            interaction.reply({ embeds: [embed], ephemeral: true })
+            await interaction.reply({ embeds: [embed], ephemeral: true })
 
         } catch (err) {
             let emebderror = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<:warn:965152728240254976>")
                 .setDescription("Non è stato possibile eliminare messaggi più vecchi di due settimane (14 giorni)")
                 .addField("Altrimenti", "Se i messaggi __**NON**__ sono più vecchi di 14 giorni segnala l'errore con `/bugreport`")
             interaction.reply({ embeds: [emebderror], ephemeral: true })
