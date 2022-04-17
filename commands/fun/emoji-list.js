@@ -23,7 +23,7 @@ module.exports = {
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
             .setTitle(`Emoji del server <a:coco:965152715753803818> `)
             .setDescription("In arrivo...")
-            server.array.forEach(server => { 
+            server.forEach(server => { 
                 if(Emoji == "animated"){
                     let a = `a`
                 } else a = ""
