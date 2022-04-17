@@ -1,3 +1,5 @@
+const { Message } = require("discord.js")
+
 module.exports = {
     name: "clear",
     data: {

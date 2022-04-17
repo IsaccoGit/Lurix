@@ -7,12 +7,14 @@ module.exports = {
     async execute(interaction) {
         //TODO server
         let server = client.guilds.cache.get(interaction.guild.id);
+        let Emoji = server.emoji
 
         //TODO controlli
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
             interaction.deferReply()
             return
         }
+
 
         //TODO invio messaggio
 
@@ -21,6 +23,13 @@ module.exports = {
             .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
             .setTitle(`Emoji del server <a:coco:965152715753803818> `)
             .setDescription("In arrivo...")
+            server.array.forEach(server => { 
+                if(Emoji == "animated"){
+                    let a = `a`
+                } else a = ""
+                embed.addField(Emoji, `<${a}:${Emoji.name}:${Emoji.id}>`)
+            })
+            console.log(Emoji)
             .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
             .setTimestamp()
         interaction.reply({ embeds: [embed] })
