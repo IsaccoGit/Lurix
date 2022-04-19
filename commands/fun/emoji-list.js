@@ -1,3 +1,5 @@
+const { Emoji } = require("discord.js");
+
 module.exports = {
     name: "emoji-list",
     data: {
@@ -8,7 +10,11 @@ module.exports = {
         //TODO server
         let serverId = interaction.guild.id
         let server = client.guilds.cache.get(serverId);
-        let Emoji = server.emoji
+        let emoji = server.emojis.cache;
+        let totPage = Math.ceil(emoji.size / 10)
+
+        let page = 1;
+        let embed = new Discord.MessageEmbed()
 
         //TODO controlli
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
@@ -16,24 +22,45 @@ module.exports = {
             return
         }
 
+        if (emoji.size == "0") {
+            emoji = "*Non sono presenti emoji in questo server*"
+        }
+
+        let Emoji = client.guilds.cache.get(interaction.guild.id).emojis.cache.sort((a, b) => b.id - a.id)
+
+        for (let i = 10 * (page - 1); 1 < 10 * page; i++) {
+            if (Emoji[i]) {
+                embed.addField(`#${i + 1} ${emoji} ${emoji.name}`, `\`${emoji}\`\r`)
+            }
+        }
 
         //TODO invio messaggio
 
-        let embed = new Discord.MessageEmbed()
-            .setColor("#6143CB")
-            .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
-            .setTitle(`Emoji del server <a:coco:965152715753803818> `)
-            .setDescription(`Tutte le emoji del server: **${server.name}**`)
-            /*server.forEach(server => { 
-                if(Emoji == "animated"){
-                    let a = `a`
-                } else a = ""
-                embed.addField(Emoji, `<${a}:${Emoji.name}:${Emoji.id}>`)
-            })*/
-            console.log(Emoji)
-            console.log(server)
-            .setFooter({ text: `Requested by ${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
-            .setTimestamp()
-        interaction.reply({ embeds: [embed] })
+        let buttonAv = new Discord.MessageButton()
+            .setLabel("Avanti")
+            .setStyle("SUCCESS")
+            .setCustomId("emojiAvanti")
+            .setEmoji("▶️")
+
+        let buttonInd = new Discord.MessageButton()
+            .setLabel("Indietro")
+            .setStyle("SUCCESS")
+            .setCustomId("emojiIndietro")
+            .setEmoji("◀️")
+
+        if (page == 1) buttonInd.setDisabled()
+        if (page == totPage) buttonAv.setDisabled()
+
+        let row = new Discord.MessageActionRow()
+            .addComponents(buttonInd)
+            .addComponents(buttonAv);
+
+        embed.setColor("#6143CB")
+        embed.setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
+        embed.setTitle(`Emoji del server <a:coco:965152715753803818>`)
+        embed.setDescription(`Tutte le emoji del server: **${server.name}**`)
+        embed.setFooter({ text: `Requested by ${interaction.user.tag} - Page: ${page}/${totPage} ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+
+        interaction.reply({ embeds: [embed], components: [row] })
     }
 }

@@ -1,6 +1,7 @@
 module.exports = {
     name: "ready",
     async execute() {
+
         /*client.guilds.cache.forEach(guild => {
             client.commands.forEach(command => {
                 guild.commands.create(command.data)
@@ -28,5 +29,6 @@ module.exports = {
         //let server = client.guilds.cache.get("933824004836458496");
 
         //client.api.applications(client.user.id).commands().delete();
+
     }
 }

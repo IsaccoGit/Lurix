@@ -5,27 +5,35 @@ module.exports = {
             interaction.deferReply()
             return
         }
-        
+
+        if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
+            var embednperm = new Discord.MessageEmbed()
+                .setTitle("NON HO IL PERMESSO<:warn:965152728240254976>")
+                .setDescription("Non ho il permesso di modificare i messaggi")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
         if (!interaction.isButton()) return
 
         let footerLength = interaction.message.embeds[0].footer.text.length
 
         let messageMeme = interaction.message.embeds[0].footer.text.slice(-18, footerLength)
 
-        if (interaction.user.id !== messageMeme) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
-                .setDescription("Non puoi eseguire un bottone non tuo")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
-
         if (interaction.customId == "memeStop") {
 
+            if (interaction.user.id !== messageMeme) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("ERRORE❌")
+                    .setDescription("Non puoi eseguire un bottone non tuo")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
             let embedStop = interaction.message.embeds[0]
-            
+
             let buttonGo = new Discord.MessageButton()
                 .setLabel("Avanti")
                 .setStyle("SUCCESS")
@@ -46,6 +54,16 @@ module.exports = {
 
         }
         if (interaction.customId == "memeAvanti") {
+
+            if (interaction.user.id !== messageMeme) {
+                let embednperm = new Discord.MessageEmbed()
+                    .setTitle("ERRORE❌")
+                    .setDescription("Non puoi eseguire un bottone non tuo")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
             try {
                 fetch("https://www.reddit.com/r/memes/random/.json").then(resp =>
                     resp.json()).then(respData => {
