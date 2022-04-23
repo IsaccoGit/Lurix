@@ -8,7 +8,7 @@ module.exports = {
 
         if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HO IL PERMESSO<:warn:965152728240254976>")
+                .setTitle("NON HO IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non ho il permesso di modificare i messaggi")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -25,7 +25,7 @@ module.exports = {
 
             if (interaction.user.id !== messageMeme) {
                 let embednperm = new Discord.MessageEmbed()
-                    .setTitle("ERRORE❌")
+                    .setTitle("ERRORE<a:false:966789840475656202>")
                     .setDescription("Non puoi eseguire un bottone non tuo")
                     .setColor("RED")
                 interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -57,7 +57,7 @@ module.exports = {
 
             if (interaction.user.id !== messageMeme) {
                 let embednperm = new Discord.MessageEmbed()
-                    .setTitle("ERRORE❌")
+                    .setTitle("ERRORE<a:false:966789840475656202>")
                     .setDescription("Non puoi eseguire un bottone non tuo")
                     .setColor("RED")
                 interaction.reply({ embeds: [embednperm], ephemeral: true })

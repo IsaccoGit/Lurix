@@ -29,10 +29,10 @@ module.exports = {
             return
         }
 
-        if (!member.kickable) {
+        if (member.id == client.application.id) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
-                .setDescription("Il bot non ha il permesso")
+                .setTitle("ERRORE<a:false:966789840475656202>")
+                .setDescription("Non puoi kickare il bot")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
@@ -40,30 +40,40 @@ module.exports = {
 
         if (member.id == interaction.user.id) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Non puoi kickare te stesso")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
 
-        if (!interaction.member.permissions.has('KICK_MEMBERS')) {
+        if (!member.kickable) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
+                .setDescription("Il bot non ha il permesso")
+                .setColor("RED")
+            interaction.reply({ embeds: [embednperm], ephemeral: true })
+            return
+        }
+
+        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
+            let embednperm = new Discord.MessageEmbed()
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
 
-        if (member.permissions.has('KICK_MEMBERS')) {
+        if (member.permissions.has('BAN_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
-                .setDescription("Non puoi kickkare uno staff")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
+                .setDescription("Non puoi kickare uno staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
+
 
         let dm = true
 

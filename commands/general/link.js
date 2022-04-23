@@ -2,7 +2,7 @@ module.exports = {
     name: "link",
     data: {
         name: "link",
-        description: "Comando per visualizzare i link importandi"
+        description: "Comando per visualizzare i link importanti"
     },
     async execute(interaction) {
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {

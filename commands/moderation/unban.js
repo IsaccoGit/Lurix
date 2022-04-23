@@ -32,7 +32,7 @@ module.exports = {
 
         if (!member.bannable) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Il bot non ha il permesso")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -41,7 +41,7 @@ module.exports = {
 
         if (!interaction.member.permissions.has('BAN_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -74,7 +74,7 @@ module.exports = {
 
         } catch (err) {
             let embederr = new Discord.MessageEmbed()
-                .setTitle("ERRORE<:warn:965152728240254976>")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("C'è stato un errore, verifica che l'id dell'utente sia corretto")
                 .setColor("RED")
             interaction.reply({ embeds: [embederr], ephemeral: true })

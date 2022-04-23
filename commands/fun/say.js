@@ -26,7 +26,7 @@ module.exports = {
         if (text.includes("@everyone") || text.includes("@here")) {
             let embed1 = new Discord.MessageEmbed()
                 .setColor("RED")
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Non puoi taggare everyone e here")
             interaction.reply({ embeds: [embed1] })
             return

@@ -24,7 +24,7 @@ module.exports = {
 
         if (!interaction.guild.me.permissions.has('MANAGE_CHANNELS')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -33,7 +33,7 @@ module.exports = {
 
         if (!interaction.member.permissions.has('MANAGE_CHANNELS')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -52,7 +52,7 @@ module.exports = {
 
         if (!timeInMs) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE<:warn:965152728240254976>")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Tempo non valido")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -61,7 +61,7 @@ module.exports = {
 
         if (timeInMs > 21600000) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE<:warn:965152728240254976>")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Tempo non valido, il tempo deve essere minore a 6 ore")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -70,7 +70,7 @@ module.exports = {
 
         if (timeInMs < 1000) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE<:warn:965152728240254976>")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Tempo non valido, il tempo deve essere maggiore a 1 secondo")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })

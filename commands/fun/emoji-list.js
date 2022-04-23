@@ -12,7 +12,6 @@ module.exports = {
         let Emoji;
         let a;
         let emojiList = "";
-        let embed = new Discord.MessageEmbed()
 
         //TODO controlli
         if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
@@ -21,29 +20,41 @@ module.exports = {
         }
 
         if (emoji.size == "0") {
-            emoji = "*Non sono presenti emoji in questo server*"
+            emojiList = "*Non sono presenti emoji in questo server<a:false:966789840475656202>*"
         }
 
         emoji.forEach((emoji) => {
 
-            if(emoji.animated == true) a = "a"
-            if(emoji.animated == false) a = ""
+            if (emoji.animated == true) a = "a"
+            if (emoji.animated == false) a = ""
 
             Emoji = `<${a}:${emoji.name}:${emoji.id}>`
 
             emojiList += Emoji + " **" + emoji.name + "** - `" + Emoji + "`\r"
-            /*let emojiListLength = emojiList.length
-            emojiList = emojiList.slice()*/
         })
 
         //TODO invio messaggio
+        if (emojiList.length >= 3900 && emojiList.length < 8000) {
+            let embed = new Discord.MessageEmbed()
+                .setColor("#6143CB")
+                .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
+                .setTitle(`Emoji del server <a:coco:965152715753803818>`)
+                .setDescription(`Tutte le emoji del server: **${server.name}**\r` + emojiList.slice(0, 3900) + "...")
 
-        embed.setColor("#6143CB")
-        embed.setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
-        embed.setTitle(`Emoji del server <a:coco:965152715753803818>`)
-        embed.setDescription(`Tutte le emoji del server: **${server.name}**\r` + emojiList)
-        embed.setFooter({ text: `Requested by ${interaction.user.tag} ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+            let embed1 = new Discord.MessageEmbed()
+                .setColor("#6143CB")
+                .setDescription( "..."+ emojiList.slice(3900, 7500))
+                .setFooter({ text: `Requested by ${interaction.user.tag} ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+            interaction.reply({ embeds: [embed, embed1] })
+            return
+        }
 
-        interaction.reply({ embeds: [embed]})
+        let embed = new Discord.MessageEmbed()
+            .setColor("#6143CB")
+            .setAuthor({ name: `${server.name.toString()}`, iconURL: server.iconURL({ dynamic: true }) })
+            .setTitle(`Emoji del server <a:coco:965152715753803818>`)
+            .setDescription(`Tutte le emoji del server: **${server.name}**\r` + emojiList)
+            .setFooter({ text: `Requested by ${interaction.user.tag} ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
+        interaction.reply({ embeds: [embed] })
     }
 }

@@ -39,7 +39,7 @@ module.exports = {
 
         if (!member.timeoutable) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Il bot non ha il permesso")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -48,7 +48,7 @@ module.exports = {
 
         if (member.id == interaction.user.id) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Non puoi mettere in timeout te stesso")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -57,7 +57,7 @@ module.exports = {
 
         if (!interaction.member.permissions.has('TIMEOUT_MEMBERS')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -66,7 +66,7 @@ module.exports = {
 
         if (member.permissions.has('ADMINISTRATOR')) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO❌")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non puoi mettere in time out un amministratore uno staff")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
@@ -101,7 +101,7 @@ module.exports = {
 
         if (!timeInMs) {
             let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE❌")
+                .setTitle("ERRORE<a:false:966789840475656202>")
                 .setDescription("Tempo non valido")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })

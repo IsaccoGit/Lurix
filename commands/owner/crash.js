@@ -12,14 +12,14 @@ module.exports = {
         
         if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO<:warn:965152728240254976>")
+                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                 .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato all'owner")
                 .setColor("RED")
             interaction.reply({ embeds: [embednperm], ephemeral: true })
             return
         }
         const embedReady = new Discord.MessageEmbed()
-            .setTitle("Bot CRASHATO<:warn:965152728240254976>")
+            .setTitle("Bot CRASHATO<a:false:966789840475656202>")
             .setColor("#ff0000")
             .addField(":alarm_clock: Time", moment(date.getTime()).format("ddd DD MMM YYYY, HH:mm:ss"))
 

@@ -2,6 +2,9 @@ module.exports = {
     name: "guildCreate",
     async execute(guild) {
         let botCount = guild.members.cache.filter(member => member.user.bot).size;
+        let guildS = client.guilds.cache.get(guild.id)
+        let ownerId = guildS.ownerId
+        let userOwner = client.users.cache.get(ownerId)
         let memberCount = guild.memberCount - botCount;
         var lvlboost = guild.premiumTier
 
@@ -21,6 +24,7 @@ module.exports = {
             .setTitle("New server⬆️")
             .setDescription("Il bot è stato aggiunto in un nuovo server (Total server:" + client.guilds.cache.size.toString() + " server e " + client.users.cache.size.toString() + " utenti)")
             .addField("Name📌", "```" + guild.name + "```")
+            .addField("Owner👑", "```Name: "+ userOwner.username + " | ID: " + ownerId + "```")
             .addField("Server ID🪧", "```" + guild.id + "```", true)
             .addField("🔰 Boost level", "```Level " + lvlboost + " (" + guild.premiumSubscriptionCount + " boost)```", true)
             .addField("Members👥", "```Total: " + guild.members.cache.size.toString() + " | Members: " + memberCount.toString() + " | Bots: " + botCount.toString() + "```")
