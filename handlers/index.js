@@ -20,3 +20,9 @@ for (const folder of eventsFolders) {
         client.on(event.name, (...args) => event.execute(...args));
     }
 }
+
+//FUNZIONI
+/*const functionFolder = fs.readdirSync(`${process.cwd()}/functions`);
+for (const file of functionFolder) {
+    const functions = require(`${process.cwd()}/functions/${file}`)
+}*/

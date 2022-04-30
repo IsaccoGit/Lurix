@@ -32,7 +32,6 @@ Other formats: **[.gif](${member.displayAvatarURL({ dynamic: true, size: 1024, f
                 format: "png",
                 size: 1024
             }))
-
         interaction.reply({ embeds: [embed] })
     }
 }

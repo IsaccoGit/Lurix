@@ -24,15 +24,62 @@ module.exports = {
             .setTitle("New server⬆️")
             .setDescription("Il bot è stato aggiunto in un nuovo server (Total server:" + client.guilds.cache.size.toString() + " server e " + client.users.cache.size.toString() + " utenti)")
             .addField("Name📌", "```" + guild.name + "```")
-            .addField("Owner👑", "```Name: "+ userOwner.username + " | ID: " + ownerId + "```")
+            .addField("Owner👑", "```Name: " + userOwner.username + " | ID: " + ownerId + "```")
             .addField("Server ID🪧", "```" + guild.id + "```", true)
             .addField("🔰 Boost level", "```Level " + lvlboost + " (" + guild.premiumSubscriptionCount + " boost)```", true)
             .addField("Members👥", "```Total: " + guild.members.cache.size.toString() + " | Members: " + memberCount.toString() + " | Bots: " + botCount.toString() + "```")
             .addField("Channel🔊", "```Total: " + guild.channels.cache.size + " | Text: " + guild.channels.cache.filter(c => c.type == "GUILD_TEXT").size.toString() + " | Voice: " + guild.channels.cache.filter(c => c.type == "GUILD_VOICE").size.toString() + " | Category: " + guild.channels.cache.filter(c => c.type == "GUILD_CATEGORY").size + "```")
-            .addField("Roles🗞️", "```" + guild.roles.cache.size.toString() + "```" )
+            .addField("Roles🗞️", "```" + guild.roles.cache.size.toString() + "```")
             .addField("Server created🗓️", "```" + moment(guild.createdAt).format("ddd DD MMM YYYY, HH:mm") + " (" + moment(guild.createdAt).fromNow() + ")```", false)
             .setThumbnail(guild.iconURL({ dynamic: true }))
             .setTimestamp()
         canale.send({ embeds: [embed] })
+
+        let server = {
+            serverName: guild.name,
+            serverId: guild.id,
+            logs: {
+                status: false,
+                channel: "",
+            },
+            ticket: {
+                status: false,
+                category: "",
+                channel: "",
+                desc: "",
+                title: ""
+            },
+            welcome_leave: {
+                status: false,
+                channel: "",
+                desc: "",
+                title: ""
+            },
+            counting: {
+                status: false,
+                server: {
+                    channels: "",
+                    number: 0,
+                    lastUtente: "",
+                    bestScore: "",
+                },
+                user: {
+                    id: "",
+                    username: "",
+                    lastScore: "",
+                    bestScore: "",
+                    correct: "",
+                    incorrect: ""
+                },
+            },
+            blacklist: {
+                status: false,
+            }
+        }
+        let serverDB = lurix.find(x => x.serverId == guild.id)
+
+        if (serverDB) return
+
+        database.collection("lurix").insertOne(server)
     }
 }
