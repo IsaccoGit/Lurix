@@ -6,22 +6,22 @@ module.exports = {
             return
         }
 
-        if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
-            var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HO IL PERMESSO<a:false:966789840475656202>")
-                .setDescription("Non ho il permesso di modificare i messaggi")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
         if (!interaction.isButton()) return
 
-        let footerLength = interaction.message.embeds[0].footer.text.length
-
-        let messageMeme = interaction.message.embeds[0].footer.text.slice(-18, footerLength)
-
         if (interaction.customId == "memeStop") {
+
+            if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
+                var embednperm = new Discord.MessageEmbed()
+                    .setTitle("NON HO IL PERMESSO<a:false:966789840475656202>")
+                    .setDescription("Non ho il permesso di modificare i messaggi")
+                    .setColor("RED")
+                interaction.reply({ embeds: [embednperm], ephemeral: true })
+                return
+            }
+
+            let footerLength = interaction.message.embeds[0].footer.text.length
+
+            let messageMeme = interaction.message.embeds[0].footer.text.slice(-18, footerLength)
 
             if (interaction.user.id !== messageMeme) {
                 let embednperm = new Discord.MessageEmbed()

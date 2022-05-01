@@ -12,7 +12,7 @@ global.fetch = require("node-fetch");
 global.moment = require("moment");
 global.configColor = require("./config/color.json");
 global.MongoClient = require("mongodb").MongoClient;
-global.lurix = ""
+global.lurixList = ""
 global.fs = require("fs");
 client.login(process.env.TOKEN).then(() => {
     require(`./handlers`)

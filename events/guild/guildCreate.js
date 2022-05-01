@@ -46,8 +46,6 @@ module.exports = {
                 status: false,
                 category: "",
                 channel: "",
-                desc: "",
-                title: ""
             },
             welcome_leave: {
                 status: false,
@@ -58,25 +56,17 @@ module.exports = {
             counting: {
                 status: false,
                 server: {
-                    channels: "",
+                    channel: "",
                     number: 0,
-                    lastUtente: "",
-                    bestScore: "",
-                },
-                user: {
-                    id: "",
-                    username: "",
-                    lastScore: "",
-                    bestScore: "",
-                    correct: "",
-                    incorrect: ""
+                    lastUtente: "Nessuno",
+                    bestScore: 0,
                 },
             },
             blacklist: {
                 status: false,
             }
         }
-        let serverDB = lurix.find(x => x.serverId == guild.id)
+        let serverDB = lurixList.find(x => x.serverId == guild.id)
 
         if (serverDB) return
 

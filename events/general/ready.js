@@ -19,10 +19,10 @@ module.exports = {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        database = db.db("cappellacluster")
+        global.database = db.db("cappellacluster")
 
         await database.collection("lurix").find().toArray(function (err, result) {
-            lurix = result
+            lurixList = result
             console.log("► MongoDB connesso");
         })
 
