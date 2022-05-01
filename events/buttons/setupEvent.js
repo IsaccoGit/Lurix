@@ -147,9 +147,9 @@ module.exports = {
 
         if (interaction.customId == "confermaResetData") {
 
-            let footer = interaction.message.embeds[0].footer.text
+            let foter = interaction.message.embeds[0].footer.text
 
-            let userId = footer.slice(-18, footer.length)
+            let userId = foter.slice(-18, foter.length)
 
             if (interaction.user.id !== userId) {
                 let embednperm = new Discord.MessageEmbed()
