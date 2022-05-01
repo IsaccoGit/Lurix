@@ -123,6 +123,14 @@ module.exports = {
         try {
             database.collection("lurix").find({ serverId: serverID }).toArray(function (err, result) {
                 let lurix = result.find(x => x.serverId == serverID);
+                if (!lurix) {
+                    let embednperm = new Discord.MessageEmbed()
+                        .setTitle("ERRORE<a:false:966789840475656202>")
+                        .setDescription("Questo server non è presente nel database, prova a reinvitarlo, se non va utilizza /bugreport altrimeni entra nel server di supporto")
+                        .setColor("RED")
+                    interaction.reply({ embeds: [embednperm], ephemeral: true })
+                    return
+                }
                 let embedF = new Discord.MessageEmbed()
 
                 if (logs) {
@@ -253,7 +261,7 @@ module.exports = {
                     let row2 = new Discord.MessageActionRow()
                         .addComponents(buttonInfo)
 
-                    interaction.reply({ embeds: [embednperm, embedRest], components: [row, row2]})
+                    interaction.reply({ embeds: [embednperm, embedRest], components: [row, row2] })
                     return
                 }
 

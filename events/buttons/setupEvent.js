@@ -172,11 +172,41 @@ module.exports = {
                 return
             }
 
-            database.collection("lurix").updateOne({ serverId: serverID }, {
-                $set: {
-                    
+            let guild = client.guilds.cache.get(interaction.guild.id)
+
+            let server = {
+                serverName: guild.name,
+                serverId: guild.id,
+                logs: {
+                    status: false,
+                    channel: "",
+                },
+                ticket: {
+                    status: false,
+                    category: "",
+                    channel: "",
+                },
+                welcome_leave: {
+                    status: false,
+                    channel: "",
+                    desc: "",
+                    title: ""
+                },
+                counting: {
+                    status: false,
+                    server: {
+                        channel: "",
+                        number: 0,
+                        lastUtente: "Nessuno",
+                        bestScore: 0,
+                    },
+                },
+                blacklist: {
+                    status: false,
                 }
-            })
+            }
+
+            database.collection("lurix").updateOne({ serverId: serverID }, { $set: server })
 
             let embed = new Discord.MessageEmbed()
                 .setColor(configColor.VERDE)
