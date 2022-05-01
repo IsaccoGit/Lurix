@@ -147,11 +147,8 @@ module.exports = {
 
         if (interaction.customId == "confermaResetData") {
 
-            try {
-                let footer = interaction.message.embeds[0].footer.text
-            } catch {
-                footer = interaction.message.embeds[1].footer.text
-            }
+            let footer = interaction.message.embeds[0].footer.text
+
             let userId = footer.slice(-18, footer.length)
 
             if (interaction.user.id !== userId) {
