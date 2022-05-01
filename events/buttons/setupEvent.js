@@ -171,7 +171,7 @@ module.exports = {
 
             let guild = client.guilds.cache.get(interaction.guild.id)
 
-            let server = {
+            let Server = {
                 serverName: guild.name,
                 serverId: guild.id,
                 logs: {
@@ -203,14 +203,14 @@ module.exports = {
                 }
             }
 
-            database.collection("lurix").updateOne({ serverId: serverID }, { $set: server })
+            database.collection("lurix").updateOne({ serverId: interaction.guild.id }, { $set: Server })
 
             let embed = new Discord.MessageEmbed()
                 .setColor(configColor.VERDE)
                 .setTitle("Database resettato<a:right:965152774532771850>")
                 .setDescription("I dati del database sono stati resettati")
                 .setFooter({ text: `Requested by ${interaction.user.tag} ID: ${interaction.user.id}`, iconURL: interaction.user.displayAvatarURL({ dynamic: true }) })
-            interaction.update({ embeds: [embed], ephemeral: true })
+            interaction.update({ embeds: [embed], components: [], ephemeral: true })
         }
     }
 }
