@@ -18,67 +18,35 @@ module.exports = {
             }
         ]
     },
+    permissions: ["MODERATE_MEMBERS"],
+    permissionsBot: ["MODERATE_MEMBERS"],
+    cooldown: 2, 
     async execute(interaction) {
+
         let utente = interaction.options.get("user")?.value;
         let reason = interaction.options.getString("reason") || "Nessun motivo"
         let member = interaction.guild.members.cache.get(utente);
-        let memberId = interaction.guild.members.cache.get(utente.id);
-        let server = client.guilds.cache.get(interaction.guild.id);
 
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
+        let embed = new Discord.MessageEmbed()
+            .setTitle("[UNBAN] ")
+            .setColor(configColor.VERDE)
+            .addField("Utente👥", `<@${utente}>`)
+            .addField("Reason⚠️", reason)
+            .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
+            .addField("Moderator👮", interaction.member.toString())
+            .addField("User ID: ", utente)
 
-        if (!member.bannable) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE<a:false:966789840475656202>")
-                .setDescription("Il bot non ha il permesso")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
-        if (!interaction.member.permissions.has('BAN_MEMBERS')) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
-                .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
+        interaction.reply({ embeds: [embed] })
         try {
-            let dm = true
-
-            let embedDm = new Discord.MessageEmbed()
-                .setTitle(`Sei stato sbannato dal server: \`${server.name}\``)
-                .setColor("#6143CB")
-                .setThumbnail(server.iconURL({ dynamic: true }))
-                .addField("Reason⚠️", reason)
-                .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
-                .addField("Moderator👮", interaction.member.toString())
-            member.send({ embeds: [embedDm] }).catch(() => { dm = false })
-
-            let embed = new Discord.MessageEmbed()
-                .setTitle("[UNBAN] " + memberId.user.tag)
-                .setColor(configColor.VERDE)
-                .addField("Reason⚠️", reason)
-                .addField("Time⏰", `${moment(new Date().getTime()).format("ddd DD MMM YYYY, HH:mm:ss")}`, false)
-                .addField("Moderator👮", interaction.member.toString())
-                .addField("User ID: ", member.user.id)
-            if (dm = false) embed.addField("WARN🚧", "**Non** è stato possibile mandare il messaggio in dm all'utente")
-                .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-            interaction.reply({ embeds: [embed] })
-            interaction.guild.members.unban({ user: utente, reason: reason })
-
-        } catch (err) {
-            let embederr = new Discord.MessageEmbed()
+            interaction.guild.members.unban(utente)
+        }
+        catch (err) {
+            console.log(err)
+            let embedError = new Discord.MessageEmbed()
                 .setTitle("ERRORE<a:false:966789840475656202>")
-                .setDescription("C'è stato un errore, verifica che l'id dell'utente sia corretto")
                 .setColor("RED")
-            interaction.reply({ embeds: [embederr], ephemeral: true })
-            return
+                .setDescription("Controlla che l'utente sia bannato e che l'id sia corrretto")
+            return interaction.reply({ embeds: [embedError] })
         }
     }
 }

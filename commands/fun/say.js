@@ -12,16 +12,14 @@ module.exports = {
             }
         ]
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         //TODO text
         let text = interaction.options.getString("text");
 
         //TODO controlli
 
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         if (text.includes("@everyone") || text.includes("@here")) {
             let embed1 = new Discord.MessageEmbed()

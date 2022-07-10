@@ -47,12 +47,6 @@ module.exports = {
                 category: "",
                 channel: "",
             },
-            welcome_leave: {
-                status: false,
-                channel: "",
-                desc: "",
-                title: ""
-            },
             counting: {
                 status: false,
                 server: {

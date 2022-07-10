@@ -12,12 +12,11 @@ module.exports = {
             }
         ]
     },
+    permissions: [],
+    permissionsBot: [],
+    cooldown: 2, 
     async execute(interaction) {
         let text = interaction.options.getString("text");
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         if (text.length > 1000) {
             let embed2 = new Discord.MessageEmbed()

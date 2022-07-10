@@ -14,29 +14,10 @@ module.exports = {
             }
         ]
     },
+    permissions: ["MANAGE_MESSAGES"],
+    permissionsBot: ["MANAGE_MESSAGES"],
+    cooldown: 2, 
     async execute(interaction) {
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
-
-        if (!interaction.guild.me.permissions.has("DELETE_MESSAGE")) {
-            var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HO IL PERMESSO<a:false:966789840475656202>")
-                .setDescription("Non ho il permesso di eliminare messaggi")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
-
-        if (!interaction.member.permissions.has("ADMINISTRATOR")) {
-            var embednperm = new Discord.MessageEmbed()
-                .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
-                .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
 
         var count = interaction.options.getNumber("count")
 

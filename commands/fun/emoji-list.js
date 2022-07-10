@@ -4,6 +4,8 @@ module.exports = {
         name: "emoji-list",
         description: "Lista delle emoji del server",
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         //TODO server
         let serverId = interaction.guild.id
@@ -14,10 +16,7 @@ module.exports = {
         let emojiList = "";
 
         //TODO controlli
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
+
 
         if (emoji.size == "0") {
             emojiList = "*Non sono presenti emoji in questo server<a:false:966789840475656202>*"

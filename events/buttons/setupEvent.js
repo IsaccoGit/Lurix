@@ -1,23 +1,12 @@
 module.exports = {
     name: "interactionCreate",
+    permissions: [],
+    permissionsBot: ["MANAGE_MESSAGES"],
     async execute(interaction) {
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         if (!interaction.isButton()) return
 
         if (interaction.customId == "resetData") {
-
-            if (!interaction.guild.me.permissions.has("MANAGE_MESSAGE")) {
-                var embednperm = new Discord.MessageEmbed()
-                    .setTitle("NON HO IL PERMESSO<a:false:966789840475656202>")
-                    .setDescription("Non ho il permesso di modificare i messaggi")
-                    .setColor("RED")
-                interaction.reply({ embeds: [embednperm], ephemeral: true })
-                return
-            }
 
             let footer = interaction.message.embeds[1].footer.text
             let userId = interaction.message.embeds[1].footer.text.slice(-18, footer.length)
@@ -182,12 +171,6 @@ module.exports = {
                     status: false,
                     category: "",
                     channel: "",
-                },
-                welcome_leave: {
-                    status: false,
-                    channel: "",
-                    desc: "",
-                    title: ""
                 },
                 counting: {
                     status: false,

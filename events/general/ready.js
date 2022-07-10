@@ -5,7 +5,7 @@ module.exports = {
             await client.application?.commands.create(commands.data)
         })
 
-        client.user.setActivity("/help | " + client.guilds.cache.size.toString() + " SERVERS | " + client.users.cache.size.toString() + " USERS", { type: "WATCHING" })
+        client.user.setActivity("/help", { type: "WATCHING" })
 
         const embedReady = new Discord.MessageEmbed()
             .setTitle(`Bot ONLINE - ${process.env.local ? `Local` : `Host`}`)
@@ -19,7 +19,7 @@ module.exports = {
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
-        global.database = db.db("cappellacluster")
+        database = db.db("cappellacluster")
 
         await database.collection("lurix").find().toArray(function (err, result) {
             lurixList = result

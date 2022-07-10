@@ -57,12 +57,6 @@ module.exports = {
         let activities = interaction.options.getString("activities")
         var activities_text = interaction.options.getString("activities-text") || "LURIX"
 
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
-
         if (interaction.member.id !== config.user.ownerDiscodId) {
             var embednperm = new Discord.MessageEmbed()
                 .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")

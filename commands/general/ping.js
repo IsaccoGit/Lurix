@@ -4,11 +4,10 @@ module.exports = {
         name: "ping",
         description: "Comando per visualizzare il ping"
     },
+    permissions: [],
+    permissionsBot: [],
+    cooldown: 2, 
     execute(interaction) {
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         var embedPing = new Discord.MessageEmbed()
             .setTitle("Pong")

@@ -4,14 +4,11 @@ module.exports = {
         name: "server",
         description: "Comando per visualizzare tutti i server in cui è presente il bot"
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         let server = client.guilds.cache.get(interaction.guild.id);
         
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
-
         let embed = new Discord.MessageEmbed()
             .setColor("#6CA1FF")
             .setTitle("<:information:965163341989437451>Servers<:information:965163341989437451>")

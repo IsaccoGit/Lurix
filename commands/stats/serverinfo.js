@@ -4,6 +4,8 @@ module.exports = {
         name: "serverinfo",
         description: "Comando per visualizzare le informazioni del bot"
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         let server = client.guilds.cache.get(interaction.guild.id);
         let botCount = server.members.cache.filter(member => member.user.bot).size;
@@ -22,11 +24,6 @@ module.exports = {
             var lvlboost = "3"
         } else if (lvlboost == "NONE") {
             var lvlboost = "0"
-        }
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
         }
 
         let embed = new Discord.MessageEmbed()

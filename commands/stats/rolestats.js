@@ -12,16 +12,14 @@ module.exports = {
             }
         ]
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         let ruolo = interaction.options.getRole("role")
         let memberCount = interaction.guild.members.cache.filter(member => member.roles.cache.find(role => role == ruolo)).size;
         let permessiRuolo = new Discord.Permissions(ruolo.permissions.bitfield);
         let elencoPermessi = "";
 
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         if (permessiRuolo.has("ADMINISTRATOR")) {
             elencoPermessi = "👑ADMINISTRATOR";

@@ -12,10 +12,14 @@ module.exports = {
             }
         ]
     },
+    permissions: [],
+    permissionsBot: [],
+    cooldown: 10, 
     execute(interaction) {
         let bug = interaction.options.getString("bug")
+        const { Permissions } = require("discord.js")
 
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
+        if (!interaction.guild.me.permissions.has(Permissions.FLAGS.MANAGE_MESSAGES)) {
             let embed1 = new Discord.MessageEmbed()
                 .setTitle(":beetle: Bug report :beetle:")
                 .setColor("#6DA54C")

@@ -5,37 +5,15 @@ module.exports = {
         description: "comando per ottere l'invito del server",
 
     },
+    permissions: ["CREATE_INSTANT_INVITE"],
+    permissionsBot: ["CREATE_INSTANT_INVITE"],
+    cooldown: 4, 
     async execute(interaction) {
         //TODO server
         let server = client.guilds.cache.get(interaction.guild.id)
 
         //TODO canale
         let canale = canaleServer = client.channels.cache.get(interaction.channel.id);
-
-        //TODO controlli permessi
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
-
-        if (!interaction.guild.me.permissions.has("CREATE_INSTANT_INVITE")) {
-            let embedErr = new Discord.MessageEmbed()
-                .setColor("RED")
-                .setTitle("ERORE<a:false:966789840475656202>")
-                .setDescription("Non ho il permesso di creare inviti")
-            interaction.reply({ embeds: [embedErr], ephemeral: true })
-            return
-        }
-
-        if (!interaction.member.permissions.has("CREATE_INSTANT_INVITE")) {
-            let embedErr = new Discord.MessageEmbed()
-                .setColor("RED")
-                .setTitle("ERORE<a:false:966789840475656202>")
-                .setDescription("Non hai il permesso di creare inviti")
-            interaction.reply({ embeds: [embedErr], ephemeral: true })
-            return
-        }
 
         //TODO creazione invito
 

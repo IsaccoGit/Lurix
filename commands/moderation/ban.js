@@ -18,6 +18,9 @@ module.exports = {
             }
         ]
     },
+    permissions: ["BAN_MEMBERS"],
+    permissionsBot: [],
+    cooldown: 2, 
     async execute(interaction) {
         let utente = interaction.options.getUser("user");
         let reason = interaction.options.getString("reason") || "Nessun motivo"
@@ -25,10 +28,6 @@ module.exports = {
 
         let server = client.guilds.cache.get(interaction.guild.id);
         try {
-            if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-                interaction.deferReply()
-                return
-            }
 
             if (member.id == client.application.id) {
                 let embednperm = new Discord.MessageEmbed()
@@ -61,15 +60,6 @@ module.exports = {
                 let embednperm = new Discord.MessageEmbed()
                     .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
                     .setDescription("Non hai il permesso per eseguire questo comando, \rE' un comando riservato allo staff")
-                    .setColor("RED")
-                interaction.reply({ embeds: [embednperm], ephemeral: true })
-                return
-            }
-
-            if (member.permissions.has('BAN_MEMBERS')) {
-                let embednperm = new Discord.MessageEmbed()
-                    .setTitle("NON HAI IL PERMESSO<a:false:966789840475656202>")
-                    .setDescription("Non puoi bannare uno staff")
                     .setColor("RED")
                 interaction.reply({ embeds: [embednperm], ephemeral: true })
                 return

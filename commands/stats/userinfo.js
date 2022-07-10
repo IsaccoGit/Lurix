@@ -12,6 +12,8 @@ module.exports = {
             }
         ]
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         let user = interaction.options.getUser("user") || interaction.user;
         let utente = interaction.guild.members.cache.get(user.id);
@@ -28,10 +30,6 @@ module.exports = {
         const userFlags = badge.toArray()
         const elencoBadge = userFlags.length ? userFlags.map(flag => flag).join(" ") : 'Nessun badge'
 
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         let embed = new Discord.MessageEmbed()
             .setTitle("Userstats - " + (utente.nickname ? utente.nickname : utente.user.username))

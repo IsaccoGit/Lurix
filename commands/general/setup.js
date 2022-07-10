@@ -11,8 +11,8 @@ module.exports = {
                 required: false
             },
             {
-                name: "welcome-leave",
-                description: "canale per i messaggi di welcome e leave",
+                name: "counting",
+                description: "canale del counting",
                 type: "CHANNEL",
                 required: false
             },
@@ -29,30 +29,20 @@ module.exports = {
                 required: false
             },
             {
-                name: "counting",
-                description: "canale del counting",
-                type: "CHANNEL",
+                name: "guida",
+                description: "aggiungere la guida per settare al completo il bot",
+                type: "BOOLEAN",
                 required: false
             }
         ]
     },
+    permissions: [],
+    permissionsBot: ["MANAGE_CHANNELS"],
+    cooldown: 15,
     async execute(interaction) {
         let serverID = interaction.guild.id
-        let server = client.guilds.cache.get(serverID)
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
-
-        if (!interaction.member.permissions.has("MANAGE_CHANNEL")) {
-            let embednperm = new Discord.MessageEmbed()
-                .setTitle("ERRORE<a:false:966789840475656202>")
-                .setDescription("Non hai il permesso per esguire questo comando")
-                .setColor("RED")
-            interaction.reply({ embeds: [embednperm], ephemeral: true })
-            return
-        }
+        var server = client.guilds.cache.get(serverID)
+        var guida = interaction.options.getBoolean("guida")
 
         let logs = interaction.options.getChannel("logs")
         if (logs) {
@@ -66,20 +56,6 @@ module.exports = {
                 return
             }
         }
-
-        let welcome_leave = interaction.options.getChannel("welcome-leave")
-        if (welcome_leave) {
-            let wlC = client.channels.cache.get(welcome_leave.id)
-            if (!wlC || wlC.type !== "GUILD_TEXT") {
-                let embednperm = new Discord.MessageEmbed()
-                    .setTitle("ERRORE<a:false:966789840475656202>")
-                    .setDescription("Non puoi selezionare canali vocali o categorie")
-                    .setColor("RED")
-                interaction.reply({ embeds: [embednperm], ephemeral: true })
-                return
-            }
-        }
-
 
         let ticketC = interaction.options.getChannel("ticket-category")
         if (ticketC) {
@@ -118,10 +94,10 @@ module.exports = {
                 interaction.reply({ embeds: [embednperm], ephemeral: true })
                 return
             }
-
         }
+
         try {
-            database.collection("lurix").find({ serverId: serverID }).toArray(function (err, result) {
+            database.collection("lurix").find({ serverId: serverID }).toArray(async function (err, result) {
                 let lurix = result.find(x => x.serverId == serverID);
                 if (!lurix) {
                     let embednperm = new Discord.MessageEmbed()
@@ -131,6 +107,7 @@ module.exports = {
                     interaction.reply({ embeds: [embednperm], ephemeral: true })
                     return
                 }
+
                 let embedF = new Discord.MessageEmbed()
 
                 if (logs) {
@@ -150,43 +127,6 @@ module.exports = {
                     })
                 }
 
-                if (welcome_leave) {
-                    let embedwl = new Discord.MessageEmbed()
-                        .setColor(configColor.VERDE)
-                        .setTitle("Bot settato<a:right:965152774532771850>")
-                        .setDescription("Canale dei welcome e dei leave settato")
-                    embedF.addField("<a:arrowr:965152788738879528>Welcome leave channel", welcome_leave.toString())
-                    client.channels.cache.get(welcome_leave.id).send({ embeds: [embedwl] })
-                    database.collection("lurix").updateOne({ serverId: serverID }, {
-                        $set: {
-                            welcome_leave: {
-                                status: true,
-                                channel: welcome_leave.id
-                            }
-                        }
-                    })
-                }
-
-
-                if (ticketC) {
-                    let embedch = new Discord.MessageEmbed()
-                        .setColor(configColor.VERDE)
-                        .setTitle("Bot settato<a:right:965152774532771850>")
-                        .setDescription("Canale dei ticket settato")
-                    embedF.addField("<a:arrowr:965152788738879528>Ticket", "Category: " + ticketC.name)
-                    client.channels.cache.get(ticketCh.id).send({ embeds: [embedch] })
-                    database.collection("lurix").updateOne({ serverId: serverID }, {
-                        $set: {
-                            ticket: {
-                                stauts: true,
-                                category: ticketC.id,
-                                channel: lurix.ticket.channel
-                            }
-                        }
-                    })
-                    embedF.addField("<a:arrowr:965152788738879528>Ticket Category", "Category: " + ticketC.name)
-                }
-
                 if (ticketCh) {
                     let embedch = new Discord.MessageEmbed()
                         .setColor(configColor.VERDE)
@@ -198,12 +138,40 @@ module.exports = {
                         $set: {
                             ticket: {
                                 stauts: true,
+                                category: lurix.ticket.category,
+                                channel: ticketCh.id
+                            }
+                        }
+                    }).then(() => {
+                        let embed = new Discord.MessageEmbed()
+                            .setColor("BLUE")
+                            .setTitle("Apri un ticket")
+                            .setDescription("Apri un ticket cliccano il bottone blu se necessario")
+                            .setThumbnail(server.iconURL({ dynamic: true }))
+                            .setFooter({ text: "Server: " + server.name })
+                        let button = new Discord.MessageButton()
+                            .setLabel("Apri Ticket")
+                            .setStyle("PRIMARY")
+                            .setCustomId("openTicket")
+                            .setEmoji("🎫")
+
+                        let row = new Discord.MessageActionRow()
+                            .addComponents(button)
+
+                        client.channels.cache.get(ticketCh.id).send({ embeds: [embed], components: [row] })
+                    })
+                }
+
+                if (ticketC) {
+                    database.collection("lurix").updateOne({ serverId: serverID }, {
+                        $set: {
+                            ticket: {
+                                stauts: true,
                                 category: ticketC.id,
                                 channel: lurix.ticket.channel
                             }
                         }
                     })
-                    embedF.addField("<a:arrowr:965152788738879528>Ticket", "Channel: " + ticketCh.toString())
                 }
 
                 if (counting) {
@@ -212,13 +180,12 @@ module.exports = {
                         .setTitle("Bot settato<a:right:965152774532771850>")
                         .setDescription("Canale del counting settato")
                     embedF.addField("<a:arrowr:965152788738879528>Counting", counting.toString())
-                    client.channels.cache.get(counting.id).send({ embeds: [embedc] })
                     database.collection("lurix").updateOne({ serverId: serverID }, {
                         $set: {
                             counting: {
                                 status: true,
                                 server: {
-                                    channels: counting.id,
+                                    channel: counting.id,
                                     number: lurix.counting.server.number,
                                     lastUtente: lurix.counting.server.lastUtente,
                                     bestScore: lurix.counting.server.bestScore
@@ -226,8 +193,27 @@ module.exports = {
                             }
                         }
                     })
+                    client.channels.cache.get(counting.id).send({ embeds: [embedc]})
+
+                    const msg = await client.channels.cache.get(counting.id).send("0").then(msg => {
+                        msg.react("🟢")
+                    })
                 }
-                if (!counting && !ticketC && !ticketCh && !welcome_leave && !logs) {
+
+                if (guida == true) {
+                    let ch = interaction.channel;
+                    let embedGuida = new Discord.MessageEmbed()
+                        .setColor(`#868686`)
+                        .setTitle(`⚙️Come si setta il bot❓`)
+                        .setDescription(`Come si utilizza correttamente il comando \`/setup\`?⚙️`)
+                        .addField("L'utilizzo", "Il bot si può settare in molte tipologie, e sono:")
+                        .addField("Logs⚙️", "Selezionare il canale per sapere tutti gli aggiornamenti del serever")
+                        .addField("Counting💯", "Selezionare il canale per settare il canale del counting, un giochino in cui ogni utente deve scrivere il numero successivo a quello precedente")
+                        .addField("Ticket🎫", "Selezionare il canale per settare il canale dei ticket e la categoria in cui verranno creati i ticket")
+                    ch.send({ embeds: [embedGuida] })
+                }
+
+                if (!counting && !ticketC && !ticketCh && !logs && !guida) {
                     let embednperm = new Discord.MessageEmbed()
                         .setTitle("ERRORE<a:false:966789840475656202>")
                         .setDescription("Non hai settato niente di nuovo")

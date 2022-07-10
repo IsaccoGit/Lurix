@@ -4,12 +4,9 @@ module.exports = {
         name: "info",
         description: "Comando per visualizzare le info del bot"
     },
+    permissions: [],
+    permissionsBot: [],
     execute(interaction) {
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         var embed = new Discord.MessageEmbed()
             .setTitle("__<:information:965163341989437451>Info BOT<:information:965163341989437451>__")

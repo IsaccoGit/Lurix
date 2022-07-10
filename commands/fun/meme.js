@@ -4,13 +4,11 @@ module.exports = {
         name: "meme",
         description: "Comando per visualizzare dei meme"
     },
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         try {
             //TODO controlli
-            if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-                interaction.deferReply()
-                return
-            }
 
             //TODO creazione meme
             fetch("https://www.reddit.com/r/memes/random/.json").then(resp =>

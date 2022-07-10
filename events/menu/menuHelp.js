@@ -1,12 +1,9 @@
 module.exports = {
     name: `interactionCreate`,
+    permissions: [],
+    permissionsBot: [],
     async execute(interaction) {
         if (!interaction.isSelectMenu()) return;
-
-        if (!interaction.guild.me.permissions.has("SEND_MESSAGE")) {
-            interaction.deferReply()
-            return
-        }
 
         var select = new Discord.MessageSelectMenu()
             .setCustomId(`helpCommandMenu`)
@@ -44,7 +41,12 @@ module.exports = {
                 value: "helpModeration",
                 description: "/kick, /mute, /tempban..."
             })
-
+            .addOptions({
+                label: "Home",
+                emoji: "🏠",
+                value: "helpHome",
+                description: "Torna alla home"
+            })
         var row = new Discord.MessageActionRow()
             .addComponents(select)
         switch (interaction.values[0]) {
@@ -58,9 +60,10 @@ module.exports = {
                     .addField("/github", "Comando per visualizzare la repository di github del bot")
                     .addField("/link", "comando per visualizzare il link di invito del bot e del server")
                     .addField("/avatar", "comando per visualizzare l'avatar di un utente")
-                    .addField("/info", "comando per visualizzare le info del bot")
                     .addField("/bugreport", "comando per reportare un bug")
                     .addField("/count-letters", "comando per contare le lettere di un testo")
+                    .addField("/get-invite", "comando per creare un invito del server")
+                    .addField("/setup", "comando per settare il bot nel server (`/setup guida: true`, per vedere come settare il bot al megio)")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -73,6 +76,8 @@ module.exports = {
                     .addField("/serverinfo", "comando per visualizzare le informazioni di un server")
                     .addField("/userinfo", "comando per visualizzare le informazioni di un utente")
                     .addField("/server", "comando per visualizzare statistiche del bot")
+                    .addField("/info", "comando per visualizzare info del bot")
+                    .addField("/rolestats", "comando per visualizzare statistiche su un ruolo")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -83,6 +88,8 @@ module.exports = {
                     .setColor("#F1C40F")
                     .setDescription("Comandi fun, di divertimento e di minigames")
                     .addField("/meme", "comando per visualizzare meme")
+                    .addField("/emoji-list", "comando per visualizzare la lista delle emoji")
+                    .addField("/say", "comando per far dire qualcosa al bot")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -95,6 +102,7 @@ module.exports = {
                     .addField("/crash 👑", "Comando per far crashare il bot, utilizzabile solo dall'owner")
                     .addField("/eval 👑", "Comando per far eseguire un codice al bot, utilizzabile solo dall'owner")
                     .addField("/restart 👑", "Comando per far restartare il bot, utilizzabile solo dall'owner")
+                    .addField("/manage👑", "comando per settare il bot, utilizzabile solo dall'owner")
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
@@ -113,6 +121,69 @@ module.exports = {
                     .addField("Comandi in arrivo...", "il bot non è completato quindi non ci sono tutti i comandi")
             }
         }
+        switch (interaction.values[0]) {
+            case "helpHome": {
+                var embed1 = new Discord.MessageEmbed()
+                    .setTitle(":robot: ALL COMMANDS :robot:")
+                    .setDescription(`Tutti i **comandi** disponibili all'interno di <@${client.application?.id}>
+            
+    <a:arrowr:965152788738879528>**Prefisso** del bot: \`/\``)
+                    .addField("Categorie", `
+    I comandi sono divisi nelle seguenti categorie:
+    > :earth_americas: General
+    > :bar_chart: Statistics
+    > :joy: Fun
+    > :dollar: Ranking    
+    > :crown: Owner
+    _Seleziona la categoria dal menù qua sotto_`)
+
+                var select = new Discord.MessageSelectMenu()
+                    .setCustomId(`helpCommandMenu`)
+                    .setPlaceholder('Select category...')
+                    .setMaxValues(1)
+                    .setMinValues(1)
+                    .addOptions({
+                        label: "General",
+                        emoji: "🌍",
+                        value: "helpGeneral",
+                        description: "/ping, /help, /twitch, /youtube..."
+                    })
+                    .addOptions({
+                        label: "Statistics",
+                        emoji: "📊",
+                        value: "helpStatistics",
+                        description: "/userstats, /avatar, /serverstats..."
+
+                    })
+                    .addOptions({
+                        label: "Fun",
+                        emoji: "😂",
+                        value: "helpFun",
+                        description: "/meme, /gaytest, /say..."
+                    })
+                    .addOptions({
+                        label: "Owner",
+                        emoji: "👑",
+                        value: "helpOwner",
+                        description: "/crash, /eval..."
+                    })
+                    .addOptions({
+                        label: "Moderation",
+                        emoji: "🔒",
+                        value: "helpModeration",
+                        description: "/kick, /mute, /tempban..."
+                    })
+                    .addOptions({
+                        label: "Home",
+                        emoji: "🏠",
+                        value: "helpHome",
+                        description: "Torna alla home"
+                    })
+                var row = new Discord.MessageActionRow()
+                    .addComponents(select)
+            }
+        }
+
         interaction.update({ embeds: [embed1], components: [row] })
     },
 };
